@@ -24,12 +24,12 @@ function display(compendium) {
     const monsters = compendium.monsters;
     const treasures = compendium.treasure;
 
-    food.forEach(x=>create_card(x));
-    non_food.forEach(x=>create_card(x));
-    equipment.forEach(x=>create_card(x));
-    materials.forEach(x=>create_card(x));
-    monsters.forEach(x=>create_card(x));
-    treasures.forEach(x=>create_card(x));
+    food.forEach(x=>new Compendium_Card(x));
+    non_food.forEach(x=>new Compendium_Card(x));
+    equipment.forEach(x=>new Compendium_Card(x));
+    materials.forEach(x=>new Compendium_Card(x));
+    monsters.forEach(x=>new Compendium_Card(x));
+    treasures.forEach(x=>new Compendium_Card(x));
 }
 
 
@@ -192,5 +192,198 @@ function populate_card(obj) {
 function delete_children(obj) {
     while(obj.firstChild) {
         obj.removeChild(obj.firstChild)
+    }
+}
+
+
+function create_ul(listContent)
+{
+    const list = document.createElement("ul");
+    listContent.forEach(x=>{
+        const list_item = document.createElement("li");
+        list_item.innerText = x;
+        list.appendChild(list_item);
+    })
+    return list;
+}
+
+class Compendium_Card {
+
+    card_container = document.createElement("div"); //Entire container
+    upper_container = document.createElement("div"); //Name and description
+    lower_container = document.createElement("div"); //Extra info and location
+    identity_container = document.createElement("div"); //Name, category, img
+    description_container = document.createElement("div"); //Description
+    info_container = document.createElement("div"); //Extra info
+    location_container = document.createElement("div"); //Location info
+
+    constructor(obj) {
+        this.init_classes();
+        this.add_headers();
+        this.populate_identity(obj);
+        this.populate_description(obj);
+        this.populate_info(obj);
+        this.populate_locations(obj);
+        this.populate_upper();
+        this.populate_lower();
+        this.populate_card();
+
+        this.appendToTarget(document.querySelector("body"));
+    }
+
+    init_classes() {
+        this.card_container.classList.add("card");
+        this.upper_container.classList.add("upper-info");
+        this.lower_container.classList.add("lower-info");
+        this.identity_container.classList.add("basic-info");
+        this.description_container.classList.add("desc");
+        this.info_container.classList.add("extra-info");
+        this.location_container.classList.add("locations");
+    }
+
+    add_headers() {
+        const description_header = document.createElement("h2");
+        const info_header = document.createElement("h2");
+        const location_header = document.createElement("h2");
+
+        description_header.innerText = "Description";
+        info_header.innerText = "Important Info";
+        location_header.innerText = "Common Locations";
+
+        this.description_container.appendChild(description_header);
+        this.info_container.appendChild(info_header);
+        this.location_container.appendChild(location_header);
+    }
+
+    populate_identity(obj) {
+        const name_header = document.createElement("h1");
+        const category_entry = document.createElement("h3");
+        const entry_image = document.createElement("img");
+
+        name_header.innerText = setProperty(obj, "name", "Name Unknown");
+        category_entry.innerText = setProperty(obj, "category", "Category Unknown");
+        entry_image.src = setProperty(obj, "image", null);
+        entry_image.alt = setProperty(obj, "name", "Name of shown creature is unknown.");
+
+        this.identity_container.appendChild(name_header);
+        this.identity_container.appendChild(category_entry);
+        this.identity_container.appendChild(entry_image);
+    }
+
+    populate_description(obj) {
+        const description = document.createElement("p");
+
+        description.innerText = setProperty(obj, "description", "No information");
+
+        this.description_container.appendChild(description);
+    }
+
+    populate_upper() {
+        this.upper_container.appendChild(this.identity_container);
+        this.upper_container.appendChild(this.description_container);
+    }
+
+    populate_locations(obj) {
+        const location_list = document.createElement("ul");
+        const locations = setProperty(obj, "common_locations", []);
+
+        if(locations.length == 0)
+        {
+            const listItem = document.createElement("li");
+            listItem.innerText = "No known locations";
+            location_list.appendChild(listItem);
+        }
+        else
+        {
+            locations.forEach(x=>{
+                const listItem = document.createElement("li");
+                listItem.innerText = x;
+                location_list.appendChild(listItem);
+            })
+        }
+        
+        this.location_container.appendChild(location_list);
+    }
+
+    populate_info(obj) {
+        //This is the most challenging one to pull off, need all other properties to be added to a potentially nested list
+        const info_list = document.createElement("ul");
+
+        for(let key in obj)
+        {
+            switch(key) {
+                case "category": case "common_locations": case "description": case "id": case "image": case "name":
+                    break; //Do nothing
+                default:
+                    const listItem = document.createElement("li");
+                    if(typeof obj[key] == "object") //Should be an array
+                    {
+                        const innerHeader = document.createElement("span");
+                        const innerList = document.createElement("ul");
+
+                        innerHeader.innerText = key.replace("_", " ") + ":"
+                        listItem.appendChild(innerHeader);
+                        if(obj[key] == null || obj[key] == undefined || obj[key].length == 0)
+                        {
+                            const innerListItem = document.createElement("li");
+
+                            innerListItem.innerText = "Unknown";
+
+                            innerList.appendChild(innerListItem);
+                        }
+                        else
+                        {
+                            obj[key].forEach(x=> {
+                                const innerListItem = document.createElement("li");
+
+                                innerListItem.innerText = x;
+
+                                innerList.appendChild(innerListItem);
+                            })
+                        }
+                        listItem.appendChild(innerList);
+                    }
+                    else
+                    {
+                        listItem.innerText = key.replace("_", " ") + ": " + obj[key];
+                    }
+                    info_list.appendChild(listItem);
+                    break;
+            }
+        }
+
+        this.info_container.appendChild(info_list);
+    }
+
+    populate_lower() {
+        this.lower_container.appendChild(this.info_container);
+        this.lower_container.appendChild(this.location_container);
+    }
+
+    populate_card() {
+        this.card_container.appendChild(this.upper_container);
+        this.card_container.appendChild(this.lower_container);
+    }
+
+    appendToTarget(target) {
+        target.appendChild(this.card_container);
+    }
+
+
+
+
+
+
+
+};
+
+function setProperty(obj, property, alt) {
+    if(obj[property] == null || obj[property] == undefined)
+    {
+        return alt;
+    }
+    else
+    {
+        return obj[property];
     }
 }

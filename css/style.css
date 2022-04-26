@@ -92,3 +92,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
+
+ul ul {
+    margin-left: 1rem;
+}
