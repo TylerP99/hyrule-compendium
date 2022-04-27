@@ -88,11 +88,28 @@ li {
 
 body {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 ul ul {
     margin-left: 1rem;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+}
+.alphabetical-sort > section > section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.alphabetical-sort > section > h2 {
+    border-bottom: 3px solid;
+    color: #3382c5;
+
+    font-size: 3rem;
+    margin: 5rem auto;
+    width: 95%;
 }
