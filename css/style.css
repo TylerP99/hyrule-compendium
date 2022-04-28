@@ -113,3 +113,34 @@ ul ul {
     margin: 5rem auto;
     width: 95%;
 }
+
+#s-body > main {
+    margin: 10rem auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.search-form {
+    border: 3px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #3382c5;
+
+    width: 33%;
+}
+
+.search-form > h1 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.result {
+    width: 33%;
+}
+
+.result > .card {
+    width: 100%;
+}

@@ -1,7 +1,8 @@
 const baseUrl = "https://botw-compendium.herokuapp.com/api/v2";
 const entryMode = "/entry/moblin";
 
-display_all();
+//display_all();
+init_search();
 
 function display_error_header(targetElement, message) {
     const target_header = document.createElement("h2");
@@ -94,6 +95,69 @@ function set_property(obj, property, alt) {
     }
 }
 
+
+/* Search */
+function init_search() {
+    const searchForm = document.querySelector(".search-form");
+    console.log("Init search");
+    searchForm.addEventListener("submit", exec_search);
+}
+
+async function exec_search(event) {
+    event.preventDefault();
+    const resultSection = document.querySelector(".result");
+    const searchInput = document.querySelector("#search").value;
+
+    const searchResult = await get_result(searchInput);
+
+    console.log("result: " + searchResult)
+
+    if(searchResult == undefined)
+    {
+        display_error_header(resultSection, `${searchInput} was not found...`);
+    }
+    else
+    {
+        display_result(searchResult, resultSection);
+    }
+}
+
+async function get_result(searchItem) {
+    let searchUrl = "https://botw-compendium.herokuapp.com/api/v2/entry/";
+    let searchResult = undefined;
+    searchItem = searchItem.replace(" ","_");
+    searchUrl += searchItem;
+
+    await fetch(searchUrl)
+    .then(res =>  res.json())
+    .then(data => {
+        if(data["message"] == "no results")
+        {
+            searchResult = undefined;
+        }
+        else
+        {
+            searchResult = data.data;
+        }
+    })
+    .catch(err => {
+        console.log(`This is an error: ${err}`)
+    })
+    return searchResult;
+}
+
+function display_result(result, targetElement) {
+    const card = new Compendium_Card(result);
+    delete_children(targetElement);
+    card.appendToTarget(targetElement);
+}
+
+
+/* Create and append Hyrule Compendium cards into the document */
+/* Usage: new Compendium_Card(obj) where obj is a properly
+          formatted compendium entry from the api
+          This will return the below object, which can be appended
+          to the document with the appendToTarget(targetElement) method  */
 class Compendium_Card {
 
     card_container = document.createElement("div"); //Entire container
@@ -203,6 +267,7 @@ class Compendium_Card {
                     break; //Do nothing
                 default:
                     const listItem = document.createElement("li");
+                    console.log(`Property and value ${key} : ${obj[key]}`)
                     if(typeof obj[key] == "object") //Should be an array
                     {
                         const innerHeader = document.createElement("span");
