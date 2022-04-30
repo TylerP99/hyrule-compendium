@@ -2,18 +2,12 @@ const baseUrl = "https://botw-compendium.herokuapp.com/api/v2";
 const entryMode = "/entry/moblin";
 
 //display_all();
-init_search();
-
-function display_error_header(targetElement, message) {
-    const target_header = document.createElement("h2");
-    target_header.classList.add("error");
-    target_header.innerText = message;
-    delete_children(targetElement);
-    targetElement.appendChild(target_header);
-}
+//init_search();
+init_complete();
 
 
-async function display_all() {
+/* Display all */
+async function init_complete() {
     const searchUrl = "https://botw-compendium.herokuapp.com/api/v2/all";
     let completeCompendium;
 
@@ -32,7 +26,7 @@ async function display_all() {
 
     if(completeCompendium != null)
     {
-        display(completeCompendium);
+        display_all_categoric(completeCompendium);
     }
     else
     {
@@ -40,14 +34,7 @@ async function display_all() {
     }
 }
 
-function sort_objs_alphabetically(objs, propertyName) {
-    console.log(objs);
-    return objs.map( x => [x[propertyName], x] )
-               .sort((a,b) => a[0].localeCompare(b[0]))
-               .map( x => x[1] );
-}
-
-function display(compendium) {
+function display_all_alphabetic(compendium) {
     const food = compendium.creatures.food;
     const non_food = compendium.creatures.non_food;
     const equipment = compendium.equipment;
@@ -66,33 +53,33 @@ function display(compendium) {
     })
 }
 
-function delete_children(obj) {
-    while(obj.firstChild) {
-        obj.removeChild(obj.firstChild)
-    }
+function display_all_categoric(compendium) {
+    const food      = compendium.creatures.food;
+    const non_food  = compendium.creatures.non_food;
+    const creatures = sort_objs_numerically(food.concat(non_food), "id");
+    const creaturesTarget = document.querySelector(".creatures > .cards");
+    const equipment = sort_objs_numerically(compendium.equipment, "id");
+    const equipmentTarget = document.querySelector(".equipment > .cards");
+    const materials = sort_objs_numerically(compendium.materials, "id");
+    const materialsTarget = document.querySelector(".materials > .cards");
+    const monsters  = sort_objs_numerically(compendium.monsters, "id");
+    const monstersTarget = document.querySelector(".monsters > .cards");
+    const treasure = sort_objs_numerically(compendium.treasure, "id");
+    const treasureTarget = document.querySelector(".treasure > .cards");
+
+    populate_section(creatures, creaturesTarget);
+    populate_section(monsters, monstersTarget);
+    populate_section(materials, materialsTarget);
+    populate_section(equipment, equipmentTarget);
+    populate_section(treasure, treasureTarget);
 }
 
-
-function create_ul(listContent)
+function populate_section(entry_array, targetElement)
 {
-    const list = document.createElement("ul");
-    listContent.forEach(x=>{
-        const list_item = document.createElement("li");
-        list_item.innerText = x;
-        list.appendChild(list_item);
-    })
-    return list;
-}
-
-function set_property(obj, property, alt) {
-    if(obj[property] == null || obj[property] == undefined)
-    {
-        return alt;
-    }
-    else
-    {
-        return obj[property];
-    }
+    entry_array.forEach(x => {
+        const card = new Compendium_Card(x);
+        card.appendToTarget(targetElement);
+    });
 }
 
 
@@ -125,7 +112,7 @@ async function exec_search(event) {
 async function get_result(searchItem) {
     let searchUrl = "https://botw-compendium.herokuapp.com/api/v2/entry/";
     let searchResult = undefined;
-    searchItem = searchItem.replace(" ","_");
+    searchItem = searchItem.replace(/\s+/,"_").toLowerCase();
     searchUrl += searchItem;
 
     await fetch(searchUrl)
@@ -152,6 +139,57 @@ function display_result(result, targetElement) {
     card.appendToTarget(targetElement);
 }
 
+/* Utility Functions */
+
+function display_error_header(targetElement, message) {
+    const target_header = document.createElement("h2");
+    target_header.classList.add("error");
+    target_header.innerText = message;
+    delete_children(targetElement);
+    targetElement.appendChild(target_header);
+}
+
+function sort_objs_alphabetically(objs, propertyName) {
+    console.log(objs);
+    return objs.map( x => [x[propertyName], x] )
+               .sort((a,b) => a[0].localeCompare(b[0]))
+               .map( x => x[1] );
+}
+
+function sort_objs_numerically(objs, propertyName) {
+    return objs.map( x => [x[propertyName], x] )
+               .sort((a,b) => Number(a[0])-Number(b[0]))
+               .map( x => x[1] );
+}
+
+function delete_children(obj) {
+    while(obj.firstChild) {
+        obj.removeChild(obj.firstChild)
+    }
+}
+
+
+function create_ul(listContent)
+{
+    const list = document.createElement("ul");
+    listContent.forEach(x=>{
+        const list_item = document.createElement("li");
+        list_item.innerText = x;
+        list.appendChild(list_item);
+    })
+    return list;
+}
+
+function set_property(obj, property, alt) {
+    if(obj[property] == null || obj[property] == undefined)
+    {
+        return alt;
+    }
+    else
+    {
+        return obj[property];
+    }
+}
 
 /* Create and append Hyrule Compendium cards into the document */
 /* Usage: new Compendium_Card(obj) where obj is a properly
@@ -211,7 +249,7 @@ class Compendium_Card {
         const category_entry = document.createElement("h3");
         const entry_image = document.createElement("img");
 
-        name_header.innerText = set_property(obj, "name", "Name Unknown");
+        name_header.innerText = set_property(obj, "id", "ID Unknown") + " - " + set_property(obj, "name", "Name Unknown");
         category_entry.innerText = set_property(obj, "category", "Category Unknown");
         entry_image.src = set_property(obj, "image", null);
         entry_image.alt = set_property(obj, "name", "Name of shown creature is unknown.");
@@ -267,7 +305,6 @@ class Compendium_Card {
                     break; //Do nothing
                 default:
                     const listItem = document.createElement("li");
-                    console.log(`Property and value ${key} : ${obj[key]}`)
                     if(typeof obj[key] == "object") //Should be an array
                     {
                         const innerHeader = document.createElement("span");

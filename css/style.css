@@ -99,13 +99,13 @@ ul ul {
     display: flex;
     flex-direction: column;
 }
-.alphabetical-sort > section > section {
+.alphabetical-sort > section > section, .categoric-sort > section > section {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-wrap: wrap;
 }
-.alphabetical-sort > section > h2 {
+.alphabetical-sort > section > h2, .categoric-sort > section > h2 {
     border-bottom: 3px solid;
     color: #3382c5;
 
@@ -143,4 +143,70 @@ ul ul {
 
 .result > .card {
     width: 100%;
+}
+
+
+#index-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 100vh;
+}
+#index-main {
+    border: 1px solid;
+    color: #3382c5;
+
+    margin: 0 auto;
+    width: 90%;
+
+    display: flex;
+    justify-content: space-around;
+}
+#hero {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+#hero > h1 {
+    border-bottom: 2px solid;
+    font-size: 2rem;
+    width: 100%;
+}
+#hero > p {
+    font-size: 1.6rem;
+}
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 50%;
+}
+
+.option-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border: 1px solid;
+
+    height: 10rem;
+    width: 10rem;
+}
+
+.option-button img {
+    background: #3382c5 ;
+    border: none;
+    height: 5rem;
+    width: 5rem;
+}
+.option-button span {
+    justify-self: flex-end;
+}
+
+.hidden {
+    display: none;
 }

@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+}
+
+/* 
+    LAYOUT
+            */
+
+#index-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+#index-main {
+    border: 1px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1vw;
+    width: 90vw;
+}
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    width: 30vw;
+}
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 50vw;
+}
+.option-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.options-button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.options-button {
+    text-align: center;
+}
+.options-button-icon {
+    border: 1px solid;
+
+    font-size: 5rem;
+
+    margin-bottom: 1rem;
+
+    text-align: center;
+
+    height: 10vw;
+    width: 10vw;
+}
+
+body {
+    background: black;
+    color: #00e1ff;
+}
+h1 {
+    border-bottom: 5px solid;
+    font-size: 5rem;
+    margin-bottom: 4rem;
+}
+p {
+    font-size: 1.6rem;
+    line-height: 1.5em;
+}
+a {
+    color: #00e1ff;
+    text-decoration: none;
+}
+#index-main > div {
+    color: red;
+    align-self: flex-start;
+}
+
+button {
+
+    height: 3rem;
+    width: 3rem;
+}
