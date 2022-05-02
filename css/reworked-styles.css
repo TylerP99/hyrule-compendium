@@ -1,0 +1,52 @@
+/*
+BOX MODEL
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/* 
+LAYOUTS
+*/
+
+/*Index*/
+
+
+/*Search*/
+
+/*View All*/
+
+
+/* 
+Styles
+*/
+/*General*/
+body {
+    background-image: url(../assets/ss_bg.jpg);
+}
+
+.sm { /*Standard Mode Color*/
+    color: #00e1ff; /* #00c1d5 */
+}
+
+.mm { /*Master Mode Color*/
+    color: #f83e02;
+}
+
+/* Loading Icon Animation */
+#loading-icon {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+#loading-icon.fade {
+    opacity: 0;
+}
+
+/*Index*/
+
+
+/*Search*/
+
+/*View All*/

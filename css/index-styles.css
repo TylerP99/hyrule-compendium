@@ -16,7 +16,6 @@
     width: 100vw;
 }
 #index-main {
-    border: 1px solid;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,6 +70,8 @@
 body {
     background: black;
     color: #00e1ff;
+
+    background-image: url(../assets/ss_bg.jpg);
 }
 h1 {
     border-bottom: 5px solid;
@@ -80,6 +81,8 @@ h1 {
 p {
     font-size: 1.6rem;
     line-height: 1.5em;
+
+    text-shadow: 0 0 .1em, 0 0 .3em;
 }
 a {
     color: #00e1ff;
@@ -94,4 +97,8 @@ button {
 
     height: 3rem;
     width: 3rem;
+}
+
+.mm {
+    color: #f83e02;
 }

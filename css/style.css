@@ -6,6 +6,9 @@ html{
     font-size: 62.5%;
 }
 
+body {
+    background-image: url(../assets/ss_bg.jpg);
+}
 
 .card {
     margin: 1%;
@@ -93,6 +96,10 @@ body {
 
 ul ul {
     margin-left: 1rem;
+}
+
+img {
+    background: inherit;
 }
 
 .card-container {
@@ -209,4 +216,13 @@ ul ul {
 
 .hidden {
     display: none;
+}
+
+#loading-icon {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+#loading-icon.fade {
+    opacity: 0;
 }

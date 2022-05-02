@@ -3,7 +3,7 @@ const entryMode = "/entry/moblin";
 
 //display_all();
 //init_search();
-init_complete();
+//init_complete();
 
 
 /* Display all */
@@ -137,6 +137,15 @@ function display_result(result, targetElement) {
     const card = new Compendium_Card(result);
     delete_children(targetElement);
     card.appendToTarget(targetElement);
+}
+
+/* Loading Icon */
+
+setInterval(toggle_fade, 1100, document.querySelector("#loading-icon"));
+
+function toggle_fade(element) {
+    console.log("toggled");
+    element.classList.toggle("fade");
 }
 
 /* Utility Functions */
