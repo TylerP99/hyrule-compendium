@@ -25,7 +25,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 1vw;
     width: 90vw;
 }
@@ -67,15 +66,26 @@
 .mm-toggle {
     align-self: flex-start;
 }
-#mm-toggle-button {
-    border: 1px solid;
-    background: inherit;
 
+#mm-toggle-button {
     height: 3vw;
     width: 3vw;
 }
+.index-footer {
+    align-self: flex-start;
+}
+
 
 /* STYLES */
+
+.option-button-icon {
+    border: 2px solid;
+    font-size: 5rem;
+}
+#mm-toggle-button {
+    border: 1px solid;
+    background: inherit;
+}
 
 /*===========================*/
 /*          Search           */
@@ -270,8 +280,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/*SHEIKAH ORANGE #ea920b */
+
 .sm { /*Standard Mode Color*/
     color: #00e1ff; /* #00c1d5 */
+}
+
+.mm2 {
+    color: #FF1E00;
 }
 
 .mm { /*Master Mode Color*/

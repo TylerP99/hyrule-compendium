@@ -5,6 +5,10 @@ const entryMode = "/entry/moblin";
 //init_search();
 //init_complete();
 
+/*============================*/
+/*      GLOBAL VARIABLES      */
+/*============================*/
+let MASTERMODE = false;
 
 /* Display all */
 async function init_complete() {
@@ -137,6 +141,22 @@ function display_result(result, targetElement) {
     const card = new Compendium_Card(result);
     delete_children(targetElement);
     card.appendToTarget(targetElement);
+}
+
+toggle_init();
+
+/* Master Mode Toggle */
+function toggle_init() {
+    //
+    // Need to add API Call logic as well, so far only changes colors, and not too well.
+    //
+
+    const mmButton = document.querySelector("#mm-toggle-button");
+
+    mmButton.addEventListener("click", () => {
+        console.log("Click")
+        document.querySelector("body").classList.toggle("mm2");
+    })
 }
 
 /* Loading Icon */
