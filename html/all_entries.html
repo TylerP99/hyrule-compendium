@@ -8,21 +8,33 @@
 
 <title>Hyrule Compendium</title>
 <link rel="stylesheet" href="../css/reset.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/reworked-styles.css">
+<script src="https://kit.fontawesome.com/d1b4bc62e5.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <div id="loading-icon">
-        <img src="../assets/sheikah_eye.svg">
-    </div>
+<body id="all-body" onload="init_complete()">
 
-    <div class="hidden">
-        <section class="result-message">
+    <header class=" back-header">
+        <a href="index.html"><nav class="back-button"><i class="fa-solid fa-arrow-left"></i></nav></a>
+    </header>
+
+    <section class="loading-icon hidden">
+        <img src="../assets/sheikah_eye.svg">
+    </section>
+
+    <section class="content">
+        <section class="all-e-info">
+            <h1>All Entries (Compendium View)</h1>
+
+            <ul id="sort-list">
+                <li>Compendium View</li>
+                <li>Alphabetical View</li>
+            </ul>
         </section>
 
         <main class="card-container">
 
-            <section class="alphabetical-sort">
+            <section class="alphabetical-sort hidden">
                 <section class="A">
                     <h2>A</h2>
                     <section class="cards">
@@ -184,7 +196,7 @@
                 </section>
             </section>
         </main>
-    </div>
+    </section>
     <script type="text/javascript" src="../js/main.js"></script>
 </body>
 

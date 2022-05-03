@@ -8,24 +8,34 @@
 
 <title>Hyrule Compendium</title>
 <link rel="stylesheet" href="../css/reset.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/reworked-styles.css">
+<script src="https://kit.fontawesome.com/d1b4bc62e5.js" crossorigin="anonymous"></script>
 </head>
 
 <body id="s-body">
+    <header class=" back-header">
+        <a href="index.html"><nav class="back-button"><i class="fa-solid fa-arrow-left"></i></nav></a>
+    </header>
 
-    <main>
-        <form method="get" class="search-form">
-            <h1>Search the Compendium for an Entry:</h1>
+    <section class="loading-icon hidden">
+        <img src="../assets/sheikah_eye.svg">
+    </section>
 
-            <p>The Hyrule Compendium contains data on all 385 creatures, equipment, materials, monsters and treasures found across Hyrule. The Compendium contains a brief description, some important information, and common locations for each entry within. Come find anything you are looking for within The Legend of Zelda: Breath of the Wild!</p>
+    <section class="content">
+        <main>
+            <form method="get" class="search-form">
+                <h1>Search the Compendium for an Entry:</h1>
 
-            <input type="search" name="search" id="search" placeholder="Search">
-        </form>
+                <p>The Hyrule Compendium contains data on all 385 creatures, equipment, materials, monsters and treasures found across Hyrule. The Compendium contains a brief description, some important information, and common locations for each entry within. Come find anything you are looking for within The Legend of Zelda: Breath of the Wild!</p>
 
-        <section class="result">
+                <input type="search" name="search" id="search" placeholder="Search">
+            </form>
 
-        </section>
-    </main>
+            <section class="result">
+
+            </section>
+        </main>
+    </section>
 
     <script type="text/javascript" src="../js/main.js"></script>
 </body>

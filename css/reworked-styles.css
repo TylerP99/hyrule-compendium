@@ -1,29 +1,273 @@
-/*
-BOX MODEL
-*/
+/* BOX MODEL RESIZE */
 * {
     box-sizing: border-box;
 }
 
+/*===========================*/
+/*          Index            */
+/*===========================*/
 
-/* 
-LAYOUTS
-*/
+/* LAYOUT */
 
-/*Index*/
+#index-body {
+    height: 100vh;
+    width: 100vw;
+}
+.index-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+#index-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1vw;
+    width: 90vw;
+}
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    width: 30vw;
+}
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 50vw;
+}
+.option-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+.option-button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    text-align: center;
+
+    height: 10vw;
+    width: 10vw;
+}
+.mm-toggle {
+    align-self: flex-start;
+}
+#mm-toggle-button {
+    border: 1px solid;
+    background: inherit;
+
+    height: 3vw;
+    width: 3vw;
+}
+
+/* STYLES */
+
+/*===========================*/
+/*          Search           */
+/*===========================*/
+
+/* LAYOUT */
+
+/* STYLES */
+
+/*===========================*/
+/*         View All          */
+/*===========================*/
+
+/* LAYOUT */
+
+.all-e-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    width: 90%;
+}
+
+#sort-list {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 30%;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.alphabetical-sort, .categoric-sort {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.alphabetical-sort > section, .categoric-sort > section {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 3rem;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#all-body h2 {
+    margin: 2rem auto;
+    width: 90%;
+}
+
+#all-body .card {
+    margin-bottom: 3rem;
+}
 
 
-/*Search*/
+/* STYLES */
+#all-body h2 {
+    border-bottom: 2px solid;
+}
 
-/*View All*/
+/*===========================*/
+/*     Compendium Card       */
+/*===========================*/
+
+/* LAYOUT */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    min-height: 50vh;
+}
+.upper-info, .lower-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+}
+.upper-info {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+.basic-info, .desc, .extra-info, .locations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    width: 49%;
+}
+.card ul {
+    font-size: 1.6rem;
+}
+
+.card {
+    padding: 1rem;
+    width: 30vw;
+}
+
+.card img {
+    max-width: 100%;
+}
+
+.card h5, .card h6, .card span {
+    text-transform: capitalize;
+}
+.card ul {
+    list-style-position: inside;
+}
+
+.card ul ul {
+    margin-left: 1rem;
+}
+
+/* STYLES */
+.card {
+    border-radius: 25px;
+    border: 5px solid;
+}
+.card img {
+    border: 2px solid;
+}
+
+.upper-info {
+    border-bottom: 2px solid;
+}
+
+.card ul {
+    list-style-type: disc;
+}
 
 
-/* 
-Styles
-*/
-/*General*/
+/*===========================*/
+/*         General           */
+/*===========================*/
+
+/* LAYOUT */
+
+.loading-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-header {
+    padding: 1rem;
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+
+    height: 3rem;
+    width: 3rem;
+}
+
+h5, h6 {
+    margin-bottom: 1rem;
+}
+
+/* STYLES */
+
+.back-button {
+    border-radius: 50%;
+    border: 5px solid;
+}
+
 body {
     background-image: url(../assets/ss_bg.jpg);
+    color: #00e1ff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sm { /*Standard Mode Color*/
@@ -34,19 +278,39 @@ body {
     color: #f83e02;
 }
 
+.hidden {
+    display: none;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+h6 {
+    font-size: 1.8rem;
+}
+h5, h6 {
+    border-bottom: 2px solid;
+}
+
+p, span{
+    font-size: 1.6rem;
+}
+
 /* Loading Icon Animation */
-#loading-icon {
+.loading-icon {
     opacity: 1;
     transition: opacity 1s;
 }
 
-#loading-icon.fade {
+.loading-icon.fade {
     opacity: 0;
 }
-
-/*Index*/
-
-
-/*Search*/
-
-/*View All*/

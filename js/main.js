@@ -141,7 +141,7 @@ function display_result(result, targetElement) {
 
 /* Loading Icon */
 
-setInterval(toggle_fade, 1100, document.querySelector("#loading-icon"));
+//setInterval(toggle_fade, 1100, document.querySelector("#loading-icon"));
 
 function toggle_fade(element) {
     console.log("toggled");
@@ -240,9 +240,9 @@ class Compendium_Card {
     }
 
     add_headers() {
-        const description_header = document.createElement("h2");
-        const info_header = document.createElement("h2");
-        const location_header = document.createElement("h2");
+        const description_header = document.createElement("h6");
+        const info_header = document.createElement("h6");
+        const location_header = document.createElement("h6");
 
         description_header.innerText = "Description";
         info_header.innerText = "Important Info";
@@ -254,8 +254,8 @@ class Compendium_Card {
     }
 
     populate_identity(obj) {
-        const name_header = document.createElement("h1");
-        const category_entry = document.createElement("h3");
+        const name_header = document.createElement("h5");
+        const category_entry = document.createElement("p");
         const entry_image = document.createElement("img");
 
         name_header.innerText = set_property(obj, "id", "ID Unknown") + " - " + set_property(obj, "name", "Name Unknown");

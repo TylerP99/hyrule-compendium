@@ -25,3 +25,5 @@ All Entries:
  - Different sorts (by category, id)
 
  - Minimal mode, just display name and picture, clicking pulls up full card
+
+ - Loading animation (set interval before api call, stop it after cards are generated)
