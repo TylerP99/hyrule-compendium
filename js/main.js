@@ -15,7 +15,11 @@ let MASTERMODE = false;
 /*===========================*/
 async function init_complete() {
     const searchUrl = "https://botw-compendium.herokuapp.com/api/v2/all";
+    const pageContent = document.querySelector(".all-e-content");
+    const loadingIcon = document.querySelector(".loading-icon");
+    console.log(loadingIcon)
     let completeCompendium;
+    let loadingAnimation = setInterval(toggle_fade, 320, loadingIcon);
 
     await fetch(searchUrl)
     .then(res => res.json() )
@@ -42,6 +46,10 @@ async function init_complete() {
 
     //Once loaded, activate toggle buttons
     init_sort_buttons();
+
+    clearInterval(loadingAnimation);
+    loadingIcon.classList.toggle("hidden");
+    pageContent.classList.toggle("hidden");
 }
 
 function display_all_alphabetic(compendium) {

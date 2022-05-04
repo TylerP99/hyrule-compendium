@@ -116,7 +116,6 @@
     align-self: center;
 }
 .search-result {
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -360,7 +359,7 @@ p, span{
 /* Loading Icon Animation */
 .loading-icon {
     opacity: 1;
-    transition: opacity 1s;
+    transition: opacity 0.3s;
 }
 
 .loading-icon.fade {

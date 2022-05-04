@@ -2,6 +2,11 @@
 
 ToDo:
 
+NEXT GOAL: 
+
+ - Loading animation during api call, starting with all entries
+   (My solution is below, on page load we set interval to start loading animation, after the buttons are initialized, stop the interval)
+
 Landing Page:
 
  - Opening Sheikah logo animation
@@ -21,8 +26,6 @@ Search:
  - Better search (multiple results, search by term insead of just name)
 
 All Entries:
-
- - Different sorts (by category, id)
 
  - Minimal mode, just display name and picture, clicking pulls up full card
 
