@@ -10,7 +10,9 @@ const entryMode = "/entry/moblin";
 /*============================*/
 let MASTERMODE = false;
 
-/* Display all */
+/*===========================*/
+/*       DISPLAY ALL         */
+/*===========================*/
 async function init_complete() {
     const searchUrl = "https://botw-compendium.herokuapp.com/api/v2/all";
     let completeCompendium;
@@ -31,11 +33,15 @@ async function init_complete() {
     if(completeCompendium != null)
     {
         display_all_categoric(completeCompendium);
+        display_all_alphabetic(completeCompendium);
     }
     else
     {
         display_error_header(document.querySelector(".result-message"), "Error while fetching data, please refresh or try again later.");
     }
+
+    //Once loaded, activate toggle buttons
+    init_sort_buttons();
 }
 
 function display_all_alphabetic(compendium) {
@@ -86,8 +92,40 @@ function populate_section(entry_array, targetElement)
     });
 }
 
+function init_sort_buttons() {
+    const compendiumViewButton = document.querySelector("#c-view");
+    const alphabeticalViewButton = document.querySelector("#a-view");
+    const compendiumContainer = document.querySelector(".categoric-sort");
+    const alphabeticalContainer = document.querySelector(".alphabetical-sort");
 
-/* Search */
+    console.log(compendiumContainer)
+
+    compendiumViewButton.otherItem = alphabeticalViewButton;
+    compendiumViewButton.container = compendiumContainer;
+    alphabeticalViewButton.otherItem = compendiumViewButton;
+    alphabeticalViewButton.container = alphabeticalContainer;
+
+    compendiumViewButton.addEventListener("click", change_view);
+    alphabeticalViewButton.addEventListener("click", change_view);
+}
+
+function change_view(event) {
+    console.log(event)
+    if(!event.target.classList.contains("active"))
+    {
+        console.log("Were doing a change")
+        event.target.classList.toggle("active");
+        event.target.otherItem.classList.toggle("active");
+        event.target.container.classList.toggle("hidden")
+        event.target.otherItem.container.classList.toggle("hidden");
+    }
+}
+
+
+
+/*===========================*/
+/*          Search           */
+/*===========================*/
 function init_search() {
     const searchForm = document.querySelector(".search-form");
     console.log("Init search");
@@ -96,7 +134,7 @@ function init_search() {
 
 async function exec_search(event) {
     event.preventDefault();
-    const resultSection = document.querySelector(".result");
+    const resultSection = document.querySelector(".search-result");
     const searchInput = document.querySelector("#search").value;
 
     const searchResult = await get_result(searchInput);
@@ -143,7 +181,7 @@ function display_result(result, targetElement) {
     card.appendToTarget(targetElement);
 }
 
-toggle_init();
+//toggle_init();
 
 /* Master Mode Toggle */
 function toggle_init() {

@@ -12,7 +12,7 @@
 <script src="https://kit.fontawesome.com/d1b4bc62e5.js" crossorigin="anonymous"></script>
 </head>
 
-<body id="s-body">
+<body id="s-body" onload="init_search()">
     <header class=" back-header">
         <a href="index.html"><nav class="back-button"><i class="fa-solid fa-arrow-left"></i></nav></a>
     </header>
@@ -21,8 +21,7 @@
         <img src="../assets/sheikah_eye.svg">
     </section>
 
-    <section class="content">
-        <main>
+    <section class="search-content">
             <form method="get" class="search-form">
                 <h1>Search the Compendium for an Entry:</h1>
 
@@ -31,10 +30,9 @@
                 <input type="search" name="search" id="search" placeholder="Search">
             </form>
 
-            <section class="result">
+            <section class="search-result">
 
             </section>
-        </main>
     </section>
 
     <script type="text/javascript" src="../js/main.js"></script>
