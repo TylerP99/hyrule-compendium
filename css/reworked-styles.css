@@ -3,6 +3,23 @@
     box-sizing: border-box;
 }
 
+/* Fonts attempt */
+@font-face {
+    font-family: "Hylian Serif";
+    src: url(../assets/fonts/hylia-serif/HyliaSerifBeta-Regular.otf);
+}
+
+@font-face {
+    font-family: "Sheikah Glyphs";
+    src: url(../assets/fonts/sheikah-glyph/BotW_Sheikah.ttf);
+    src: url(../assets/fonts/sheikah-glyph/BotW_Sheikah_Bold.ttf);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Hylian Serif";
+}
+
+
 /*===========================*/
 /*          Index            */
 /*===========================*/
@@ -327,7 +344,7 @@ h5, h6 {
 }
 
 body {
-    background-image: url(../assets/ss_bg.jpg);
+    background-image: url(../assets/images/ss_bg.jpg);
     color: #00e1ff;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -391,6 +408,18 @@ p {
 
 
 @media screen and (max-width: 500px){
+
+    #index-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    #index-main > * {
+        width: 100%;
+    }
+
+
     .card {
         width: 90vw;
     }
