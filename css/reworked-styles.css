@@ -10,8 +10,16 @@
 /* LAYOUT */
 
 #index-body {
-    height: 100vh;
-    width: 100vw;
+    border: 10px solid;
+
+}
+.index-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 1rem;
+
 }
 .index-content {
     display: flex;
@@ -19,7 +27,6 @@
     justify-content: center;
     align-items: center;
 
-    height: 100vh;
 }
 #index-main {
     display: flex;
@@ -195,6 +202,10 @@
     color: orange;
 }
 
+#sort-list > li {
+    cursor: pointer;
+}
+
 /*===========================*/
 /*     Compendium Card       */
 /*===========================*/
@@ -244,6 +255,9 @@
 .card h5, .card h6, .card span {
     text-transform: capitalize;
 }
+.card h5, .card h6 {
+    width: 100%;
+}
 .card ul {
     list-style-position: inside;
 }
@@ -282,7 +296,11 @@
     align-items: center;
 }
 
-.back-header {
+.back-header > nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+
     padding: 1rem;
 }
 

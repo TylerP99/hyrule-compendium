@@ -4,8 +4,9 @@ ToDo:
 
 NEXT GOAL: 
 
- - Loading animation during api call, starting with all entries
-   (My solution is below, on page load we set interval to start loading animation, after the buttons are initialized, stop the interval)
+ - Add full master mode functionality
+    - MM Buttons in headers on all pages
+    - Change URL before fetch and refetch if on search or view all
 
 Landing Page:
 
