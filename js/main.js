@@ -266,6 +266,36 @@ function set_property(obj, property, alt) {
     }
 }
 
+
+
+
+class Site_Driver {
+    mastermodeMode = false; //Tracks if the site is using mastermode api 
+    mastermodeButton = get_mm_button();
+
+    //Initializes everything for index
+    init() {
+
+    }
+
+    init_mastermode_button() {
+        
+    }
+    // Returns the button element that controls master mode. It's done generically here so the inhereting classes can also use it.
+    get_mm_button() {
+        return document.querySelector("#mm-toggle-button"); //All pages have this button
+    }
+};
+
+
+class Search_Driver extends Site_Driver{
+
+};
+
+class View_All_Driver extends Site_Driver {
+
+};
+
 /* Create and append Hyrule Compendium cards into the document */
 /* Usage: new Compendium_Card(obj) where obj is a properly
           formatted compendium entry from the api
