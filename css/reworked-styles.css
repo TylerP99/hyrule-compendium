@@ -380,6 +380,8 @@ body {
 
 h1 {
     font-size: 5rem;
+    border-bottom: 2px solid;
+    margin-bottom: 2rem;
 }
 
 h2 {
@@ -412,9 +414,13 @@ p, span{
 }
 
 
+@media screen and (max-width: 1200px) {
+    .card {
+        width: 45vw;
+    }
+}
 
-
-@media screen and (max-width: 500px){
+@media screen and (max-width: 700px){
 
     #index-main {
         display: flex;
