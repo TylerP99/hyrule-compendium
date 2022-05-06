@@ -53,7 +53,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .index-content {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -422,13 +421,15 @@ p, span{
 
 @media screen and (max-width: 700px){
 
-    #index-main {
+    .index-content {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+
+        width: 100%;
     }
-    #index-main > * {
+    .index-content #hero, .index-content #options {
         width: 100%;
     }
 
