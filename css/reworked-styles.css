@@ -81,17 +81,15 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 
     text-align: center;
-
-    height: 10vw;
-    width: 10vw;
+     
+    padding: 3rem;
 }
 .mm-toggle {
     align-self: flex-start;
 }
 
 #mm-toggle-button {
-    height: 3vw;
-    width: 3vw;
+    padding: 1rem;
 }
 .index-footer {
     align-self: flex-start;
