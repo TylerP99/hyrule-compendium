@@ -427,7 +427,8 @@ p, span{
         width: 95%;
     }
     #hero {
-        margin-bottom: 7rem;
+        margin-top: -15rem;
+        margin-bottom: 10rem;
     }
 
     .search-content {
