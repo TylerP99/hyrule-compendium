@@ -426,6 +426,9 @@ p, span{
     .index-content #hero, .index-content #options {
         width: 95%;
     }
+    #hero {
+        margin-bottom: 15rem;
+    }
 
     .search-content {
         display: flex;
