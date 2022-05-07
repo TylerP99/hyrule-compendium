@@ -8,6 +8,12 @@ NEXT GOAL:
 
  - SVG Sheikah logo
 
+ - Jump-to buttons, mostly for mobile the scrolling is crazy
+
+  - Add some orange hover flavor for buttons, back buttons
+
+  - Explore different body fonts?
+
 Landing Page:
 
  - Opening Sheikah logo animation

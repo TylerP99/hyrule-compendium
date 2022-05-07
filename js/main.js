@@ -54,7 +54,7 @@ class Search_Driver extends Site_Driver{
     async execute_search(event) {
         event.preventDefault(); //Stop the form from doing form stuff, we just want to place the card in the DOM
         this.cardLoaded = false;
-        const searchInput = document.querySelector("#search").value;
+        const searchInput = document.querySelector("#search-input").value;
         const searchResult = await this.get_result(searchInput);
 
         if(searchResult == undefined)
