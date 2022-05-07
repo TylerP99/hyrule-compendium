@@ -4,9 +4,9 @@ ToDo:
 
 NEXT GOAL: 
 
- - Add full master mode functionality
-    - MM Buttons in headers on all pages
-    - Change URL before fetch and refetch if on search or view all
+ - Condense and organize stylesheet, then fix layout issues (mobile broken, loading icon not centered). Abandon vh/vw, praise the %s
+
+ - SVG Sheikah logo
 
 Landing Page:
 
