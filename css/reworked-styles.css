@@ -490,8 +490,17 @@ p, span{
         font-size: 62.5%;
     }
 
+
+    #index-body, #s-body, #all-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .glyph-border {
         letter-spacing: 1rem;
+        writing-mode: sideways-lr;
     }
 }
 
