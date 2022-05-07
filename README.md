@@ -4,13 +4,11 @@ ToDo:
 
 NEXT GOAL: 
 
- - Condense and organize stylesheet, then fix layout issues (mobile broken, loading icon not centered). Abandon vh/vw, praise the %s
+ - Fix mobile, it's broken
 
  - SVG Sheikah logo
 
  - Jump-to buttons, mostly for mobile the scrolling is crazy
-
-  - Add some orange hover flavor for buttons, back buttons
 
   - Explore different body fonts?
 

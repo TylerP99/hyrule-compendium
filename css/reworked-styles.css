@@ -107,9 +107,18 @@ h1, h2, h3, h4, h5, h6 {
 #hero > h1 {
     border-bottom: 2px solid;
 }
+.option-button {
+    transition: 0.2s color;
+}
+.option-button:hover {
+    color: #ea920b;
+}
 .option-button-icon {
     border: 2px solid;
     font-size: 5rem;
+}
+.index-footer a {
+    color: #ea920b;
 }
 
 /*===========================*/
@@ -393,6 +402,11 @@ h5, h6 {
     border-radius: 50%;
     border: 5px solid;
     font-size: 2rem;
+
+    transition: 0.2s color;
+}
+.back-button:hover {
+    color: #ea920b;
 }
 
 body {
@@ -474,6 +488,10 @@ p, span{
     }
     html {
         font-size: 62.5%;
+    }
+
+    .glyph-border {
+        letter-spacing: 1rem;
     }
 }
 
