@@ -500,7 +500,7 @@ p, span{
 
     .glyph-border {
         letter-spacing: 1rem;
-        writing-mode: sideways-lr;
+        writing-mode: inherit;
     }
 }
 
