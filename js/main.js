@@ -1,299 +1,244 @@
-const baseUrl = "https://botw-compendium.herokuapp.com/api/v2";
-const entryMode = "/entry/moblin";
-
-//display_all();
-//init_search();
-//init_complete();
-
-/*============================*/
-/*      GLOBAL VARIABLES      */
-/*============================*/
-let MASTERMODE = false;
-
-/*===========================*/
-/*       DISPLAY ALL         */
-/*===========================*/
-async function init_complete() {
-    const searchUrl = "https://botw-compendium.herokuapp.com/api/v2/all";
-    const pageContent = document.querySelector(".all-e-content");
-    const loadingIcon = document.querySelector(".loading-icon");
-    console.log(loadingIcon)
-    let completeCompendium;
-    let loadingAnimation = setInterval(toggle_fade, 320, loadingIcon);
-
-    await fetch(searchUrl)
-    .then(res => res.json() )
-    .then(data => {
-        console.log(data);
-        completeCompendium = data.data;
-    })
-    .catch(err => {
-        console.error(err);
-        completeCompendium = null;
-    });
-
-    console.log(completeCompendium)
-
-    if(completeCompendium != null)
-    {
-        display_all_categoric(completeCompendium);
-        display_all_alphabetic(completeCompendium);
-    }
-    else
-    {
-        display_error_header(document.querySelector(".result-message"), "Error while fetching data, please refresh or try again later.");
-    }
-
-    //Once loaded, activate toggle buttons
-    init_sort_buttons();
-
-    clearInterval(loadingAnimation);
-    loadingIcon.classList.toggle("hidden");
-    pageContent.classList.toggle("hidden");
-}
-
-function display_all_alphabetic(compendium) {
-    const food = compendium.creatures.food;
-    const non_food = compendium.creatures.non_food;
-    const equipment = compendium.equipment;
-    const materials = compendium.materials;
-    const monsters = compendium.monsters;
-    const treasures = compendium.treasure;
-    let all = food.concat(non_food, equipment, materials, monsters, treasures);
-
-    all = sort_objs_alphabetically(all, "name");
-
-    all.forEach(x => {
-        const target = x["name"][0].toUpperCase();
-        const targetSection = document.querySelector("." + target + " > section");
-        const targetCard = new Compendium_Card(x);
-        targetCard.appendToTarget(targetSection);
-    })
-}
-
-function display_all_categoric(compendium) {
-    const food      = compendium.creatures.food;
-    const non_food  = compendium.creatures.non_food;
-    const creatures = sort_objs_numerically(food.concat(non_food), "id");
-    const creaturesTarget = document.querySelector(".creatures > .cards");
-    const equipment = sort_objs_numerically(compendium.equipment, "id");
-    const equipmentTarget = document.querySelector(".equipment > .cards");
-    const materials = sort_objs_numerically(compendium.materials, "id");
-    const materialsTarget = document.querySelector(".materials > .cards");
-    const monsters  = sort_objs_numerically(compendium.monsters, "id");
-    const monstersTarget = document.querySelector(".monsters > .cards");
-    const treasure = sort_objs_numerically(compendium.treasure, "id");
-    const treasureTarget = document.querySelector(".treasure > .cards");
-
-    populate_section(creatures, creaturesTarget);
-    populate_section(monsters, monstersTarget);
-    populate_section(materials, materialsTarget);
-    populate_section(equipment, equipmentTarget);
-    populate_section(treasure, treasureTarget);
-}
-
-function populate_section(entry_array, targetElement)
-{
-    entry_array.forEach(x => {
-        const card = new Compendium_Card(x);
-        card.appendToTarget(targetElement);
-    });
-}
-
-function init_sort_buttons() {
-    const compendiumViewButton = document.querySelector("#c-view");
-    const alphabeticalViewButton = document.querySelector("#a-view");
-    const compendiumContainer = document.querySelector(".categoric-sort");
-    const alphabeticalContainer = document.querySelector(".alphabetical-sort");
-
-    console.log(compendiumContainer)
-
-    compendiumViewButton.otherItem = alphabeticalViewButton;
-    compendiumViewButton.container = compendiumContainer;
-    alphabeticalViewButton.otherItem = compendiumViewButton;
-    alphabeticalViewButton.container = alphabeticalContainer;
-
-    compendiumViewButton.addEventListener("click", change_view);
-    alphabeticalViewButton.addEventListener("click", change_view);
-}
-
-function change_view(event) {
-    console.log(event)
-    if(!event.target.classList.contains("active"))
-    {
-        console.log("Were doing a change")
-        event.target.classList.toggle("active");
-        event.target.otherItem.classList.toggle("active");
-        event.target.container.classList.toggle("hidden")
-        event.target.otherItem.container.classList.toggle("hidden");
-    }
-}
-
-
-
-/*===========================*/
-/*          Search           */
-/*===========================*/
+/*===========================================*/
+/*         General Driver Functions          */
+/*===========================================*/
 function init_search() {
-    const searchForm = document.querySelector(".search-form");
-    console.log("Init search");
-    searchForm.addEventListener("submit", exec_search);
+    const searchPage = new Search_Driver;
+    searchPage.init();
 }
 
-async function exec_search(event) {
-    event.preventDefault();
-    const resultSection = document.querySelector(".search-result");
-    const searchInput = document.querySelector("#search").value;
-
-    const searchResult = await get_result(searchInput);
-
-    console.log("result: " + searchResult)
-
-    if(searchResult == undefined)
-    {
-        display_error_header(resultSection, `${searchInput} was not found...`);
-    }
-    else
-    {
-        display_result(searchResult, resultSection);
-    }
+function init_view_all() {
+    const viewAllPage = new View_All_Driver;
+    viewAllPage.init();
 }
 
-async function get_result(searchItem) {
-    let searchUrl = "https://botw-compendium.herokuapp.com/api/v2/entry/";
-    let searchResult = undefined;
-    searchItem = searchItem.replace(/\s+/,"_").toLowerCase();
-    searchUrl += searchItem;
+/*===========================================*/
+/*  Index Driver & General Purpose Site Code */
+/*                                           */
+/*   Usage: Set a var to new Site_Driver(),  */
+/*   and call var.init() in body of index.   */
+/*===========================================*/
+class Site_Driver {
+    baseUrl = "https://botw-compendium.herokuapp.com/api/v2"; //Base api call url, inhereted classes will customize it to finish the call
 
-    await fetch(searchUrl)
-    .then(res =>  res.json())
-    .then(data => {
-        if(data["message"] == "no results")
+    init() {
+        //Void, defined in children
+    }
+
+    //Used to display errors
+    display_error_header(targetElement, message) {
+        const target_header = document.createElement("h2");
+        target_header.classList.add("error");
+        target_header.innerText = message;
+        delete_children(targetElement);
+        targetElement.appendChild(target_header);
+    }
+};
+
+class Search_Driver extends Site_Driver{
+    resultSection = document.querySelector(".search-result");
+    searchForm = document.querySelector(".search-form");
+    cardLoaded = false; // Tracks if a search has been done yet, redo api call if true
+    lastSearchTarget = "" //Tracks last successful search target for api recall
+
+    searchOption = "/entry/"
+
+    init() {
+        //init search functions
+        this.init_search_form();
+    }
+
+    init_search_form() {
+        this.searchForm.addEventListener("submit", this.execute_search.bind(this));
+    }
+
+    async execute_search(event) {
+        event.preventDefault(); //Stop the form from doing form stuff, we just want to place the card in the DOM
+        this.cardLoaded = false;
+        const searchInput = document.querySelector("#search").value;
+        const searchResult = await this.get_result(searchInput);
+
+        if(searchResult == undefined)
         {
-            searchResult = undefined;
+            this.display_error_header(this.resultSection, `${searchInput} was not found...`);
         }
         else
         {
-            searchResult = data.data;
+            this.display_result(searchResult);
         }
-    })
-    .catch(err => {
-        console.log(`This is an error: ${err}`)
-    })
-    return searchResult;
-}
-
-function display_result(result, targetElement) {
-    const card = new Compendium_Card(result);
-    delete_children(targetElement);
-    card.appendToTarget(targetElement);
-}
-
-//toggle_init();
-
-/* Master Mode Toggle */
-function toggle_init() {
-    //
-    // Need to add API Call logic as well, so far only changes colors, and not too well.
-    //
-
-    const mmButton = document.querySelector("#mm-toggle-button");
-
-    mmButton.addEventListener("click", () => {
-        console.log("Click")
-        document.querySelector("body").classList.toggle("mm2");
-    })
-}
-
-/* Loading Icon */
-
-//setInterval(toggle_fade, 1100, document.querySelector("#loading-icon"));
-
-function toggle_fade(element) {
-    console.log("toggled");
-    element.classList.toggle("fade");
-}
-
-/* Utility Functions */
-
-function display_error_header(targetElement, message) {
-    const target_header = document.createElement("h2");
-    target_header.classList.add("error");
-    target_header.innerText = message;
-    delete_children(targetElement);
-    targetElement.appendChild(target_header);
-}
-
-function sort_objs_alphabetically(objs, propertyName) {
-    console.log(objs);
-    return objs.map( x => [x[propertyName], x] )
-               .sort((a,b) => a[0].localeCompare(b[0]))
-               .map( x => x[1] );
-}
-
-function sort_objs_numerically(objs, propertyName) {
-    return objs.map( x => [x[propertyName], x] )
-               .sort((a,b) => Number(a[0])-Number(b[0]))
-               .map( x => x[1] );
-}
-
-function delete_children(obj) {
-    while(obj.firstChild) {
-        obj.removeChild(obj.firstChild)
-    }
-}
-
-
-function create_ul(listContent)
-{
-    const list = document.createElement("ul");
-    listContent.forEach(x=>{
-        const list_item = document.createElement("li");
-        list_item.innerText = x;
-        list.appendChild(list_item);
-    })
-    return list;
-}
-
-function set_property(obj, property, alt) {
-    if(obj[property] == null || obj[property] == undefined)
-    {
-        return alt;
-    }
-    else
-    {
-        return obj[property];
-    }
-}
-
-
-
-
-class Site_Driver {
-    mastermodeMode = false; //Tracks if the site is using mastermode api 
-    mastermodeButton = get_mm_button();
-
-    //Initializes everything for index
-    init() {
-
     }
 
-    init_mastermode_button() {
-        
+    async get_result(searchItem) {
+        console.log(this)
+        let searchResult = undefined; //If it stays undefined, we didnt get a result
+
+        searchItem = searchItem.trim().replace(/\s+/,"_").toLowerCase(); // Get rid of leading/trailing whitespace, replace spaces with an underscore, set everything to lowercase, all for a valid input for api call
+
+        let searchUrl = this.baseUrl;
+
+        searchUrl += this.searchOption + searchItem;
+
+        console.log(searchUrl);
+
+        await fetch( searchUrl )
+        .then(res => res.json())
+        .then(data => {
+            if(data["message"] != "no results") //Api call returns this if searchItem is not found
+            {
+                searchResult = data.data; //Set searchResult to the entry we got
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        })
+
+        return searchResult; 
     }
-    // Returns the button element that controls master mode. It's done generically here so the inhereting classes can also use it.
-    get_mm_button() {
-        return document.querySelector("#mm-toggle-button"); //All pages have this button
+
+    display_result(result) { //Result is a compendium entry
+        const card = new Compendium_Card(result);
+        delete_children(this.resultSection);
+        card.appendToTarget(this.resultSection);
+        this.cardLoaded = true;
     }
-};
-
-
-class Search_Driver extends Site_Driver{
-
 };
 
 class View_All_Driver extends Site_Driver {
+    viewAllOption = "/all";
+    viewAllUrl = this.baseUrl + this.viewAllOption;
+    loadingIconContainer = document.querySelector(".loading-icon");
+    loadingIconAnimation;
+    categoricContainer = document.querySelector(".categoric-sort");
+    alphabeticalContainer = document.querySelector(".alphabetical-sort");
+    contentContainer = document.querySelector(".all-e-content");
+    errorHeader = document.querySelector(".error-header");
+    categoricSortButton = document.querySelector("#c-view");
+    alphabeticSortButton = document.querySelector("#a-view");
 
+    async init() {
+        //Turn on loading icon
+        this.init_loading_icon();
+
+        //Fetch compendium
+        const compendium = await this.get_compendium();
+        console.log(compendium)
+
+        //Verify Compendium fetch was good
+        if(compendium == null) {
+            this.display_error_header(this.errorHeader, "Fetch failed, please reload...")
+        }
+        else
+        { 
+            //Populate categoric
+            this.populate_categoric(compendium);
+            //Populate 
+            this.populate_alphabetic(compendium);
+        }
+
+        //Init sort buttons
+        this.init_sort_buttons();
+
+        //Turn off loading icon
+        this.stop_loading_icon();
+
+        //Display content
+        this.toggle_hidden();
+    }
+
+    init_loading_icon() {
+        this.loadingIconAnimation = setInterval(this.loading_animation_driver.bind(this), 320);
+    }
+
+    stop_loading_icon() {
+        clearInterval(this.loadingIconAnimation);
+        this.loadingIconContainer.classList.toggle("hidden")
+    }
+
+    loading_animation_driver() {
+        this.loadingIconContainer.classList.toggle("fade");
+    }
+
+    async get_compendium() {
+        let compendium;
+
+        await fetch(this.viewAllUrl)
+        .then(res => res.json())
+        .then(data => {
+            compendium = data.data;
+        })
+        .catch(err => {
+            console.error(err);
+            compendium = null;
+        })
+
+        return compendium;
+    }
+
+    populate_categoric(compendium) {
+        const food      = compendium.creatures.food;
+        const non_food  = compendium.creatures.non_food;
+        const creatures = sort_objs_numerically(food.concat(non_food), "id");
+        const creaturesTarget = document.querySelector(".creatures > .cards");
+        const equipment = sort_objs_numerically(compendium.equipment, "id");
+        const equipmentTarget = document.querySelector(".equipment > .cards");
+        const materials = sort_objs_numerically(compendium.materials, "id");
+        const materialsTarget = document.querySelector(".materials > .cards");
+        const monsters  = sort_objs_numerically(compendium.monsters, "id");
+        const monstersTarget = document.querySelector(".monsters > .cards");
+        const treasure = sort_objs_numerically(compendium.treasure, "id");
+        const treasureTarget = document.querySelector(".treasure > .cards");
+
+        populate_section(creatures, creaturesTarget);
+        populate_section(monsters, monstersTarget);
+        populate_section(materials, materialsTarget);
+        populate_section(equipment, equipmentTarget);
+        populate_section(treasure, treasureTarget);
+    }
+
+    populate_alphabetic(compendium) {
+        const food = compendium.creatures.food;
+        const non_food = compendium.creatures.non_food;
+        const equipment = compendium.equipment;
+        const materials = compendium.materials;
+        const monsters = compendium.monsters;
+        const treasures = compendium.treasure;
+        let all = food.concat(non_food, equipment, materials, monsters, treasures);
+
+        all = sort_objs_alphabetically(all, "name");
+
+        all.forEach(x => {
+            const target = x["name"][0].toUpperCase();
+            const targetSection = document.querySelector("." + target + " > section");
+            const targetCard = new Compendium_Card(x);
+            targetCard.appendToTarget(targetSection);
+        })
+    }
+
+    toggle_hidden() {
+        this.contentContainer.classList.toggle("hidden")
+    }
+
+    init_sort_buttons() {
+
+        this.categoricSortButton.otherItem = this.alphabeticSortButton;
+        this.categoricSortButton.container = this.categoricContainer;
+        this.alphabeticSortButton.otherItem = this.categoricSortButton;
+        this.alphabeticSortButton.container = this.alphabeticalContainer;
+
+        this.categoricSortButton.addEventListener("click", this.change_view);
+        this.alphabeticSortButton.addEventListener("click", this.change_view);
+    }
+
+    change_view(event) {
+        console.log(event)
+        if(!event.target.classList.contains("active"))
+        {
+            console.log("Were doing a change")
+            event.target.classList.toggle("active");
+            event.target.otherItem.classList.toggle("active");
+            event.target.container.classList.toggle("hidden")
+            event.target.otherItem.container.classList.toggle("hidden");
+        }
+    }
 };
 
 /* Create and append Hyrule Compendium cards into the document */
@@ -463,3 +408,56 @@ class Compendium_Card {
         target.appendChild(this.card_container);
     }
 };
+
+/*=============================*/
+/*      Utility Functions      */
+/*=============================*/
+function sort_objs_alphabetically(objs, propertyName) {
+    console.log(objs);
+    return objs.map( x => [x[propertyName], x] )
+               .sort((a,b) => a[0].localeCompare(b[0]))
+               .map( x => x[1] );
+}
+
+function sort_objs_numerically(objs, propertyName) {
+    return objs.map( x => [x[propertyName], x] )
+               .sort((a,b) => Number(a[0])-Number(b[0]))
+               .map( x => x[1] );
+}
+
+function delete_children(obj) {
+    while(obj.firstChild) {
+        obj.removeChild(obj.firstChild)
+    }
+}
+
+
+function create_ul(listContent)
+{
+    const list = document.createElement("ul");
+    listContent.forEach(x=>{
+        const list_item = document.createElement("li");
+        list_item.innerText = x;
+        list.appendChild(list_item);
+    })
+    return list;
+}
+
+function set_property(obj, property, alt) {
+    if(obj[property] == null || obj[property] == undefined)
+    {
+        return alt;
+    }
+    else
+    {
+        return obj[property];
+    }
+}
+
+function populate_section(entry_array, targetElement)
+{
+    entry_array.forEach(x => {
+        const card = new Compendium_Card(x);
+        card.appendToTarget(targetElement);
+    });
+}

@@ -12,7 +12,7 @@
 <script src="https://kit.fontawesome.com/d1b4bc62e5.js" crossorigin="anonymous"></script>
 </head>
 
-<body id="all-body" onload="init_complete()">
+<body id="all-body" onload="init_view_all()">
 
     <header class="back-header">
         <nav>
@@ -21,10 +21,6 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </div>
             </a>
-
-            <div class="mm-toggle">
-                <button type="button" name="mastermode-toggle" id="mm-toggle-button">MM</button>
-            </div>
         </nav>
     </header>
 
@@ -40,6 +36,8 @@
                 <li class="active" id="c-view">Compendium View</li>
                 <li class="" id="a-view">Alphabetical View</li>
             </ul>
+
+            <div class="error-header hidden"></div>
         </section>
 
         <main class="card-container">
