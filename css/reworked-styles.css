@@ -28,21 +28,35 @@ h1, h2, h3, h4, h5, h6 {
 
 #index-body {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
+
     height: 100vh;
 }
-.index-header {
+.index-container {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 96%;
+}
+.glyph-border {
+
+    display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    cursor: none;
 
-    padding: 1rem;
-
-    align-self: flex-end;
-
+    font-family: "Sheikah Glyphs";
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    width: 2%;
+}
+.snd{
+    justify-content: flex-start;
 }
 .mm-toggle {
     align-self: flex-start;
@@ -126,6 +140,19 @@ h1, h2, h3, h4, h5, h6 {
 /*===========================*/
 
 /* LAYOUT */
+#s-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 96%;
+}
 .search-content {
     display: flex;
     flex-direction: row;
@@ -137,6 +164,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 90vh;
     width: 90%;
 }
+
 .search-form {
     display: flex;
     flex-direction: column;
@@ -164,6 +192,21 @@ h1, h2, h3, h4, h5, h6 {
 /*===========================*/
 
 /* LAYOUT */
+
+#all-body{
+    display: flex;
+
+    overflow: scroll;
+}
+
+.all-e-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 96%;
+}
 
 .all-e-info {
     display: flex;

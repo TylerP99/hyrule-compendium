@@ -13,33 +13,44 @@
 </head>
 
 <body id="s-body" onload="init_search()">
-    <header class="back-header">
-        <nav>
-            <a href="../index.html">
-                <div class="back-button">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-            </a>
-        </nav>
-    </header>
 
-    <section class="loading-icon hidden">
-        <img src="../assets/images/sheikah_eye.svg">
+    <div class="glyph-border">
+        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJK</p>
+    </div>
+    
+    <section class="search-container">
+        <header class="back-header">
+            <nav>
+                <a href="../index.html">
+                    <div class="back-button">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </a>
+            </nav>
+        </header>
+
+        <section class="loading-icon hidden">
+            <img src="../assets/images/sheikah_eye.svg">
+        </section>
+
+        <section class="search-content">
+                <form method="get" class="search-form">
+                    <h1>Search the Compendium for an Entry:</h1>
+
+                    <p>The Hyrule Compendium contains data on all 385 creatures, equipment, materials, monsters and treasures found across Hyrule. The Compendium contains a brief description, some important information, and common locations for each entry within. Come find anything you are looking for within The Legend of Zelda: Breath of the Wild!</p>
+
+                    <input type="search" name="search" id="search" placeholder="Search">
+                </form>
+
+                <section class="search-result">
+
+                </section>
+        </section>
     </section>
 
-    <section class="search-content">
-            <form method="get" class="search-form">
-                <h1>Search the Compendium for an Entry:</h1>
-
-                <p>The Hyrule Compendium contains data on all 385 creatures, equipment, materials, monsters and treasures found across Hyrule. The Compendium contains a brief description, some important information, and common locations for each entry within. Come find anything you are looking for within The Legend of Zelda: Breath of the Wild!</p>
-
-                <input type="search" name="search" id="search" placeholder="Search">
-            </form>
-
-            <section class="search-result">
-
-            </section>
-    </section>
+    <div class="glyph-border snd">
+        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJK</p>
+    </div>
 
     <script type="text/javascript" src="../js/main.js"></script>
 </body>
