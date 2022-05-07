@@ -490,6 +490,9 @@ p, span{
         font-size: 62.5%;
     }
 
+    .back-button, .option-button {
+        transition: none;
+    }
 
     #index-body, #s-body, #all-body {
         display: flex;
