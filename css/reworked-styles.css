@@ -484,6 +484,9 @@ p, span{
         width: 100%;
     }
 
+    #sort-list {
+        flex-direction: column;
+    }
 
     .card {
         width: 90vw;
@@ -506,6 +509,10 @@ p, span{
     .glyph-border {
         letter-spacing: 1rem;
         writing-mode: inherit;
+    }
+
+    .loading-icon > img{
+        max-width: 70%;
     }
 }
 
