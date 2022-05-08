@@ -16,12 +16,6 @@
 }
 
 
-/* General Header Rule */
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Hylian Serif";
-}
-
-
 /*===========================*/
 /*          Index            */
 /*===========================*/
@@ -209,7 +203,10 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
 
-    width: 30%;
+    width: 20%;
+}
+#sort-list li {
+    width: 50%;
 }
 
 .card-container {
@@ -421,6 +418,11 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* General Header Rule */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Hylian Serif";
 }
 
 h1 {

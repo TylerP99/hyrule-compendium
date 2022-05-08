@@ -4,7 +4,7 @@ ToDo:
 
 NEXT GOAL: 
 
- - Fix mobile, it's broken
+ - Fix mobile, it's not looking amazing
 
  - SVG Sheikah logo
 
