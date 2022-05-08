@@ -509,6 +509,7 @@ p, span{
     .glyph-border {
         letter-spacing: 1rem;
         writing-mode: inherit;
+        overflow: hidden;
     }
 
     .loading-icon > img{
