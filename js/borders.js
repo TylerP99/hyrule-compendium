@@ -70,7 +70,7 @@ function get_page_height() {
 class Glyph_Border {
     borderContainer = document.createElement("ul");
     minGlyphs = 0;
-    maxGlyphs = 10;
+    maxGlyphs = 9;
 
     get_height() {
         return Math.max( this.borderContainer.scrollHeight, this.borderContainer.offsetHeight, this.borderContainer.clientHeight)
@@ -80,15 +80,104 @@ class Glyph_Border {
         let counter = 0
         while(this.get_height() < get_page_height())
         {
-            console.log(`${this.get_height()} vs ${get_page_height()}`)
             this.make_random_glyph_ul();
             counter++;
-            if(counter > 100) {break;}
+            if(counter > 37) {break;}
         }
     }
 
     animate_border() {
-        
+        //Goal: Randomly toggle fade on glyphs
+        //Get list of uls of lis of glyphs
+        const glyphRowList = this.borderContainer.querySelectorAll("ul");
+
+        //Pick a random ul, then a random li
+        let randomIndex = Math.floor(Math.random() * glyphRowList.length);
+        const randomList = glyphRowList[randomIndex];
+        const numChoices = 4;
+
+        let randomChoice = Math.floor(Math.random() * (numChoices+1));
+
+        switch(randomChoice) {
+            case 0:
+                this.remove_random_glyph(randomList);
+                break;
+            case 1:
+                this.add_random_glyph(randomList);
+                break;
+            case 2:
+                this.change_random_glyph(randomList);
+                break;
+            case 3:
+                this.fade_random_glyph(randomList);
+                break;
+            case 4:
+                this.change_color_random_glyph(randomList);
+                break;
+            default:
+                //Nothing
+                break;
+        }
+        return;
+    }
+
+    remove_random_glyph(glyphRow) {
+        const targetGlyph = this.pick_random_glyph(glyphRow);
+
+        if(targetGlyph != null) {
+            glyphRow.removeChild(targetGlyph);
+        }
+    }
+
+    add_random_glyph(glyphRow) {
+        if(glyphRow.childNodes.length < this.maxGlyphs)
+        {
+            const randomGlyph = this.get_random_glyph();
+            const glyphLi = document.createElement("li");
+
+            glyphLi.appendChild(randomGlyph.glyph);
+            glyphLi.classList.add("glyph");
+
+            glyphRow.appendChild(glyphLi);
+        }
+    }
+
+    change_random_glyph(glyphRow) {
+        const targetGlyph = this.pick_random_glyph(glyphRow);
+
+        if(targetGlyph != null) {
+            targetGlyph.removeChild(targetGlyph.firstChild);
+
+            const newGlyph = this.get_random_glyph();
+
+            targetGlyph.appendChild(newGlyph.glyph);
+        }
+
+    }
+
+    fade_random_glyph(glyphRow) {
+        const targetGlyph = this.pick_random_glyph(glyphRow);
+
+        if(targetGlyph != null)
+        {
+            targetGlyph.classList.toggle("fade")
+        }
+    }
+
+    change_color_random_glyph(glyphRow) {
+        const targetGlyph = this.pick_random_glyph(glyphRow);
+
+        if(targetGlyph != null)
+        {
+            targetGlyph.classList.toggle("glyph-active")
+        }
+    }
+
+    pick_random_glyph(glyphRow) {
+        const glyphNodeList = glyphRow.childNodes;
+        if(glyphNodeList.length == 0) { return null; }
+        const randomIndex = Math.floor(Math.random() * glyphNodeList.length);
+        return glyphNodeList[randomIndex];
     }
 
     make_random_glyph_ul() {
@@ -99,20 +188,21 @@ class Glyph_Border {
         const lowerLimit = this.minGlyphs;
 
         //Maximum number of glyphs allowed in the ul, non inclusive
-        const upperLimit = this.maxGlyphs;
+        const upperLimit = this.maxGlyphs + 1;
 
         const numberOfGlyphs = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
 
         for(let i = 0; i < numberOfGlyphs; ++i)
         {
             const glyphLi = document.createElement("li");
+            glyphLi.classList.add("glyph")
+
+
             const randomGlyph = this.get_random_glyph();
 
             glyphLi.appendChild(randomGlyph.glyph);
             glyphUl.appendChild(glyphLi);
         }
-
-        console.log(glyphUl);
         this.borderContainer.appendChild(glyphUl);
         //return glyphUl;
     }
@@ -261,6 +351,6 @@ let glyphBorder2 = new Glyph_Border();
 glyphBorder2.make_border();
 document.querySelector(".glyph-border-right").appendChild(glyphBorder2.borderContainer);
 
-console.log(glyphBorder.get_height());
-console.log(get_page_height())
-console.log(glyphBorder.borderContainer.querySelectorAll("li"))
+
+let int = setInterval(glyphBorder.animate_border.bind(glyphBorder), 50)
+let int2 = setInterval(glyphBorder2.animate_border.bind(glyphBorder2), 50)
