@@ -336,6 +336,10 @@
 
 /* LAYOUT */
 
+body {
+    min-height: 100vh;
+}
+
 .glyph-border {
 
     display: flex;
@@ -509,7 +513,6 @@ p, span{
     .glyph-border {
         letter-spacing: 1rem;
         writing-mode: inherit;
-        overflow: hidden;
     }
 
     .loading-icon > img{

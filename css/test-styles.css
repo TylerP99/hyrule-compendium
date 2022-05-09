@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-image: url(../assets/images/ss_bg.jpg);
+    color: #00e1ff;
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: flex;
+
+    height: 100vh;
+}
+
+img {
+    color: inherit;
+}
+
+.glyph-border-right {
+    border: 1px solid;
+    width: 10%;
+}
+
+.glyph-border-left {
+    border: 1px solid;
+    width: 10%;
+}
+
+main {
+    border: 1px solid;
+    width: 80%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glyph-border-left > ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.glyph-border-right > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.glyph-border-left > ul > ul, .glyph-border-right > ul > ul {
+    display: flex;
+    height: 2rem;
+}
+
+.glyph-border-left li, .glyph-border-right li {
+    height: 2rem;
+    width: 2rem;
+}

@@ -4,9 +4,11 @@ ToDo:
 
 NEXT GOAL: 
 
+ - SVG Borders, ANIMATED (glyphs borders are random, glyphs fade in and out randomly, change color, change glyph, all random)
+
  - Fix mobile, it's not looking amazing
 
- - SVG Sheikah logo
+ - Fix SVG Sheikah logo (its rough, maybe look into inkscape idk)
 
  - Jump-to buttons, mostly for mobile the scrolling is crazy
 
