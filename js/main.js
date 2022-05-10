@@ -21,7 +21,8 @@ class Site_Driver {
     baseUrl = "https://botw-compendium.herokuapp.com/api/v2"; //Base api call url, inhereted classes will customize it to finish the call
 
     init() {
-        //Void, defined in children
+        //Set up index borders
+        init_borders();
     }
 
     //Used to display errors

@@ -74,3 +74,531 @@ main {
 .glyph-active {
     color: orange;
 }
+
+/* BOX MODEL RESIZE */
+* {
+    box-sizing: border-box;
+}
+
+/* TLOZ Fonts */
+@font-face {
+    font-family: "Hylian Serif";
+    src: url(../assets/fonts/hylia-serif/HyliaSerifBeta-Regular.otf);
+}
+
+@font-face {
+    font-family: "Sheikah Glyphs";
+    src: url(../assets/fonts/sheikah-glyph/BotW_Sheikah.ttf);
+    src: url(../assets/fonts/sheikah-glyph/BotW_Sheikah_Bold.ttf);
+}
+
+
+/*===========================*/
+/*          Index            */
+/*===========================*/
+
+/*********** LAYOUT ************/
+/* Generally, layout contains  */
+/* rules around spacing.       */
+/* Items will show up in the   */
+/* order of their first        */
+/* appearance within the html  */
+/*******************************/
+#index-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100vh;
+}
+.index-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 96%;
+}
+.index-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    margin-bottom: 2rem;
+
+    width: 30%;
+}
+#hero > h1 {
+    margin-bottom: 2rem;
+}
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 50vw;
+}
+.option-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+.option-button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    text-align: center;
+     
+    padding: 3rem;
+}
+.index-footer {
+    align-self: flex-start;
+}
+
+
+/*********** STYLES ************/
+/* Styles contains anything    */
+/* that is distictly a visual  */
+/* change that is not layout.  */
+/* Font spacing rules may show */
+/* up here over layout.        */
+/*******************************/
+#hero > h1 {
+    border-bottom: 2px solid;
+}
+.option-button {
+    transition: 0.2s color;
+}
+.option-button:hover {
+    color: #ea920b;
+}
+.option-button-icon {
+    border: 2px solid;
+    font-size: 5rem;
+}
+.index-footer a {
+    color: #ea920b;
+}
+
+/*===========================*/
+/*          Search           */
+/*===========================*/
+
+/* LAYOUT */
+#s-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 96%;
+}
+.search-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 0 auto;
+
+    height: 90vh;
+    width: 90%;
+}
+.search-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    height: 50%;
+    width: 33%;
+}
+#search-input {
+    align-self: center;
+}
+.search-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33%;
+}
+
+/* STYLES */
+
+/*===========================*/
+/*         View All          */
+/*===========================*/
+
+/* LAYOUT */
+
+#all-body{
+    display: flex;
+}
+
+.all-e-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 96%;
+}
+.all-e-container .back-header {
+    align-self: flex-start;
+}
+
+.all-e-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    width: 90%;
+}
+
+#sort-list {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 20%;
+}
+#sort-list li {
+    width: 50%;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.alphabetical-sort, .categoric-sort {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.alphabetical-sort > section, .categoric-sort > section {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 3rem;
+}
+
+#all-body h2 {
+    margin: 2rem auto;
+    width: 90%;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#all-body .card {
+    margin-bottom: 3rem;
+}
+
+
+/* STYLES */
+#all-body h2 {
+    border-bottom: 2px solid;
+}
+
+.active {
+    color: orange;
+}
+
+#sort-list > li {
+    cursor: pointer;
+}
+
+/*===========================*/
+/*     Compendium Card       */
+/*===========================*/
+
+/* LAYOUT */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+    width: 30vw;
+}
+.upper-info, .lower-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+}
+.upper-info {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+.basic-info, .desc, .extra-info, .locations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    width: 49%;
+}
+
+.card h5, .card h6 {
+    width: 100%;
+}
+
+.card img {
+    max-width: 100%;
+}
+
+.card ul {
+    list-style-position: inside;
+}
+
+.card ul ul {
+    margin-left: 1rem;
+}
+
+
+/* STYLES */
+.card {
+    border-radius: 25px;
+    border: 5px solid;
+}
+.upper-info {
+    border-bottom: 2px solid;
+}
+.card h5, .card h6, .card span {
+    text-transform: capitalize;
+}
+.card img {
+    border: 2px solid;
+}
+.card ul {
+    list-style-type: disc;
+    font-size: 1.6rem;
+}
+
+/*===========================*/
+/*         General           */
+/*===========================*/
+
+/* LAYOUT */
+
+body {
+    min-height: 100vh;
+}
+
+.glyph-border {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: none;
+
+    font-family: "Sheikah Glyphs";
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    width: 2%;
+}
+.snd{ /* Used on second glyph border to adjust alignment */
+    justify-content: flex-start;
+}
+
+
+/* Might move to all entries section if it isnt used in search*/
+.loading-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Loading Icon Animation */
+.loading-icon {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.loading-icon.fade {
+    opacity: 0;
+}
+
+.back-header > nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+
+    padding: 1rem;
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.7rem;
+}
+h1 {
+    margin-bottom: 2rem;
+}
+
+h5, h6 {
+    margin-bottom: 1rem;
+}
+
+/* STYLES */
+
+.back-button {
+    border-radius: 50%;
+    border: 5px solid;
+    font-size: 2rem;
+
+    transition: 0.2s color;
+}
+.back-button:hover {
+    color: #ea920b;
+}
+
+body {
+    background-image: url(../assets/images/ss_bg.jpg);
+    color: #00e1ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.orange {
+    color: #ea920b;
+}
+
+.hidden {
+    display: none;
+}
+
+/* General Header Rule */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Hylian Serif";
+}
+
+h1 {
+    border-bottom: 2px solid;
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+h6 {
+    font-size: 1.8rem;
+}
+
+h5, h6 {
+    border-bottom: 2px solid;
+}
+
+p, span{
+    font-size: 1.6rem;
+}
+
+
+
+/*===========================*/
+/*   Mobile/Tablet Styles    */
+/*===========================*/
+
+@media screen and (max-width: 1200px){
+
+    .index-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        width: 100%;
+    }
+    .index-content #hero, .index-content #options {
+        width: 95%;
+    }
+    #hero {
+        margin-top: -10rem;
+        margin-bottom: 10rem;
+    }
+
+    .search-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .search-content > * {
+        width: 100%;
+    }
+
+    #sort-list {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 90vw;
+    }
+    html {
+        font-size: 62.5%;
+    }
+
+    .back-button, .option-button {
+        transition: none;
+    }
+
+    #index-body, #s-body, #all-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .glyph-border {
+        letter-spacing: 1rem;
+        writing-mode: inherit;
+    }
+
+    .loading-icon > img{
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+    .card {
+        width: 45vw;
+    }
+}

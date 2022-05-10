@@ -4,13 +4,15 @@ ToDo:
 
 NEXT GOAL: 
 
- - SVG Borders, ANIMATED (glyphs borders are random, glyphs fade in and out randomly, change color, change glyph, all random)
+ - Add glyph borders to rest of codebase
+
+ - Figure out mobile glyph borders, maybe low resource version?
+
+ - Jump to buttons for all-entries page
 
  - Fix mobile, it's not looking amazing
 
  - Fix SVG Sheikah logo (its rough, maybe look into inkscape idk)
-
- - Jump-to buttons, mostly for mobile the scrolling is crazy
 
   - Explore different body fonts?
 
@@ -22,10 +24,6 @@ Landing Page:
 
  - Mobile Layout
 
- - Master Mode Toggle with color scheme change
-
- - Top and bottom borders (Sheikah slate borders?)
-
 Search:
  
  - Layouts and styles for now
@@ -35,8 +33,6 @@ Search:
 All Entries:
 
  - Minimal mode, just display name and picture, clicking pulls up full card
-
- - Loading animation (set interval before api call, stop it after cards are generated)
 
 
  #Credits:
