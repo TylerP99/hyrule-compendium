@@ -28,11 +28,14 @@ const X_PATH = "M80 1036h239v-638h-239v638zM1275 1036h239v-638h-239v638zM80 1195
 const Y_PATH = "M80 239l239 -239v1036h-239v-797zM478 1195v-1195h239v1195l-239 239h-159l-239 -239h398zM1275 1434l239 -239v-797h-239v1036zM877 1434h239v-1195h398l-239 -239h-159l-239 239v1195z";
 const Z_PATH = "M80 1195l239 239h956l239 -239v-558l-239 -239h-159l-239 239v399h239v-399h159v558h-1195zM319 239v558h159v-399h239v399l-239 239h-159l-239 -239v-558l239 -239h956l239 239h-1195z";
 
-
-
 /*===========================================*/
 /*         General Driver Functions          */
 /*===========================================*/
+function init_index() {
+    const indexPage = new Site_Driver;
+    indexPage.init();
+}
+
 function init_search() {
     const searchPage = new Search_Driver;
     searchPage.init();
@@ -51,10 +54,14 @@ function init_view_all() {
 /*===========================================*/
 class Site_Driver {
     baseUrl = "https://botw-compendium.herokuapp.com/api/v2"; //Base api call url, inhereted classes will customize it to finish the call
+    leftBorderContainer = document.querySelector(".glyph-border-left");
+    rightBorderContainer = document.querySelector(".glyph-border-right");
+    leftBorder = new Glyph_Border;
+    rightBorder = new Glyph_Border;
 
     init() {
         //Set up index borders
-        init_borders();
+        this.init_borders();
     }
 
     //Used to display errors
@@ -64,6 +71,11 @@ class Site_Driver {
         target_header.innerText = message;
         delete_children(targetElement);
         targetElement.appendChild(target_header);
+    }
+
+    init_borders() {
+        this.leftBorderContainer.appendChild(this.leftBorder.borderContainer);
+        this.rightBorderContainer.appendChild(this.rightBorder.borderContainer);
     }
 };
 
@@ -452,11 +464,15 @@ class Glyph_Border {
     /* up to maxGlyphs defined below.            */
     /*===========================================*/
 
-
+    constructor() {
+        this.make_border();
+        this.animationInterval = setInterval(this.animate_border.bind(this), this.animationTimer);
+    }
 
     /************Member Variables************/
 
     borderContainer = document.createElement("ul"); 
+    animationTimer = 500; //In ms
     minGlyphs = 0;
     maxGlyphs = 9;
 
@@ -477,6 +493,14 @@ class Glyph_Border {
         for(let i = 0; i < pageHeight/glyphHeight; ++i) {
             this.make_random_glyph_ul();
         }
+    }
+
+    enable() {
+        this.animationInterval = setInterval(this.animate_border.bind(this), this.animationTimer);
+    }
+
+    disable() {
+        clearInterval(this.animationInterval);
     }
 
     //Changes a random glyph with a randomly chosen effect
@@ -848,3 +872,7 @@ function get_page_height() {
                      document.documentElement.scrollHeight,
                      document.documentElement.offsetHeight )
 }
+
+
+const indexPage = new Site_Driver;
+indexPage.init()
