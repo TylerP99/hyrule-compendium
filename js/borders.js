@@ -92,6 +92,10 @@ class Glyph_Border {
     /************** Animation Methods **************/
 
     //Deletes a random glyph from a glyph list, does nothing if the list is empty
+    // Parameters:
+    //   @ glyphRow: a reference to a ul containing the svg glyphs
+    //
+    // Return: Nothing, does alter glyphRow by removing a reference to a glyph
     remove_random_glyph(glyphRow) {
         const targetGlyph = this.pick_random_glyph(glyphRow); //Pick a random glyph from the glyph list to use next
 
@@ -101,6 +105,10 @@ class Glyph_Border {
     }
 
     //Appends a random glyph to a glyph list, but does nothing if the list is full
+    // Parameters:
+    //   @ glyphRow: a reference to a ul containing the svg glyphs
+    //
+    // Return: Nothing, does alter glyphRow by adding a reference to a new glyph
     add_random_glyph(glyphRow) {
         if(glyphRow.childNodes.length < this.maxGlyphs) //This only allows lists that contain less than the maximum allowed amount of glyphs to have one added, otherwise nothing will happen
         {
@@ -214,7 +222,12 @@ class Glyph_Border {
 }
 
 
-// This should make the svg element glyph
+/******************* Glyph Class *******************/
+/* Usage: Create a glyph with new Glyph(character) */
+/* to produce the glyph for that character. Glyph  */
+/* format and path information was taken from the  */
+/* Sheikah symbols typeface linked in the README.  */
+/***************************************************/
 class Glyph {
 
     constructor(char) {
