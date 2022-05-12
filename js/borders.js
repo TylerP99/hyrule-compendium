@@ -35,24 +35,30 @@ class Glyph_Border {
 
     /************Member Methods************/
 
-    //Returns current height of the border ul
+    //Returns current height of the currently rendered border ul
     get_height() {
         return Math.max( this.borderContainer.scrollHeight, this.borderContainer.offsetHeight, this.borderContainer.clientHeight)
     }
 
     //Creates border based on page size
-    //NEED TO FINISH
+
+    //Naive implementation, need live testing
     make_border() {
-        let counter = 0
-        while(this.get_height() < get_page_height())
-        {
+        let pageHeight = get_page_height();
+        const glyphHeight = 20;
+
+        for(let i = 0; i < pageHeight/glyphHeight; ++i) {
             this.make_random_glyph_ul();
-            counter++;
-            if(counter > 37) {break;}
         }
     }
 
     //Changes a random glyph with a randomly chosen effect
+    //
+    // Parameters: none
+    //
+    // Returns: Nothing, but modifies a random glyph and glyphlist within the 
+    // border in some way (Possible ways described by individual animation functions)
+
     animate_border() {
         //Goal: Randomly toggle fade on glyphs
         //Get list of uls of lis of glyphs
@@ -234,6 +240,12 @@ class Glyph {
         this.glyph = this.make_svg_glyph(char);
     }
 
+    // Creates an svg glyph element
+    //
+    // Parameters:
+    //   @char: An alphabetic character case insensitive to make the corresponding glyph
+    //
+    // Returns: A reference to the complete svg element
     make_svg_glyph(char) {
         const svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const gContainer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
