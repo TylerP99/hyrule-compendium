@@ -335,6 +335,55 @@ html {
 }
 
 /*===========================*/
+/*         Borders           */
+/*===========================*/
+
+/*Border styles*/
+.glyph-border-right {
+    width: 10%;
+}
+
+.glyph-border-left {
+    width: 10%;
+}
+
+.glyph-border-left > ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.glyph-border-right > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.glyph-border-left > ul > ul, .glyph-border-right > ul > ul {
+    display: flex;
+    height: 2rem;
+}
+
+.glyph-border-left li, .glyph-border-right li {
+    height: 2rem;
+    width: 2rem;
+}
+
+.glyph {
+    opacity: 1;
+    transition: opacity 1s, color 0.5s;
+}
+
+.fade {
+    opacity: 0;
+}
+
+.glyph-active {
+    color: orange;
+}
+
+/*===========================*/
 /*         General           */
 /*===========================*/
 
@@ -343,24 +392,6 @@ html {
 body {
     min-height: 100vh;
 }
-
-.glyph-border {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    cursor: none;
-
-    font-family: "Sheikah Glyphs";
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    width: 2%;
-}
-.snd{ /* Used on second glyph border to adjust alignment */
-    justify-content: flex-start;
-}
-
 
 /* Might move to all entries section if it isnt used in search*/
 .loading-icon {
@@ -528,50 +559,4 @@ p, span{
     .card {
         width: 45vw;
     }
-}
-
-
-/*Border styles*/
-.glyph-border-right {
-    width: 10%;
-}
-
-.glyph-border-left {
-    width: 10%;
-}
-
-.glyph-border-left > ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-.glyph-border-right > ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-}
-
-.glyph-border-left > ul > ul, .glyph-border-right > ul > ul {
-    display: flex;
-    height: 2rem;
-}
-
-.glyph-border-left li, .glyph-border-right li {
-    height: 2rem;
-    width: 2rem;
-}
-
-.glyph {
-    opacity: 1;
-    transition: opacity 1s, color 0.5s;
-}
-
-.fade {
-    opacity: 0;
-}
-
-.glyph-active {
-    color: orange;
 }

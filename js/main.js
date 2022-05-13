@@ -89,7 +89,9 @@ class Search_Driver extends Site_Driver{
 
     init() {
         //init search functions
+        this.init_borders();
         this.init_search_form();
+
     }
 
     init_search_form() {
@@ -161,6 +163,7 @@ class View_All_Driver extends Site_Driver {
 
     async init() {
         //Turn on loading icon
+        this.init_borders();
         this.init_loading_icon();
 
         //Fetch compendium
@@ -472,7 +475,8 @@ class Glyph_Border {
     /************Member Variables************/
 
     borderContainer = document.createElement("ul"); 
-    animationTimer = 500; //In ms
+    animationTimer = 5; //In ms
+    lastPageHeight = 0
     minGlyphs = 0;
     maxGlyphs = 9;
 
@@ -488,6 +492,7 @@ class Glyph_Border {
     //Naive implementation, need live testing
     make_border() {
         let pageHeight = get_page_height();
+        this.lastPageHeight = pageHeight;
         const glyphHeight = 20;
 
         for(let i = 0; i < pageHeight/glyphHeight; ++i) {
@@ -872,7 +877,3 @@ function get_page_height() {
                      document.documentElement.scrollHeight,
                      document.documentElement.offsetHeight )
 }
-
-
-const indexPage = new Site_Driver;
-indexPage.init()

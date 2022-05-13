@@ -4,17 +4,17 @@ ToDo:
 
 NEXT GOAL: 
 
- - Add glyph borders to rest of codebase
-
  - Figure out mobile glyph borders, maybe low resource version?
 
- - Jump to buttons for all-entries page
+ - Jump to buttons for all-entries page (last of the js for now)
 
  - Fix mobile, it's not looking amazing
 
  - Fix SVG Sheikah logo (its rough, maybe look into inkscape idk)
 
   - Explore different body fonts?
+
+  - Font Glow
 
 Landing Page:
 
@@ -44,5 +44,3 @@ All Entries:
  - Header font: https://artsyomni.com/ 
 
  - Sheikah Glyphs Font by Sarinilli: https://www.deviantart.com/sarinilli 
-
- - I want green square
