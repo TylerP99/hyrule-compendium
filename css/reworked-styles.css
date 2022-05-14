@@ -39,12 +39,13 @@ html {
     height: 100vh;
 }
 .index-container {
+    border: 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    width: 96%;
+    width: 80%;
 }
 .index-content {
     display: flex;
@@ -52,6 +53,7 @@ html {
     align-items: center;
 }
 #hero {
+    border: 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -59,17 +61,18 @@ html {
 
     margin-bottom: 2rem;
 
-    width: 30%;
+    width: 50%;
 }
 #hero > h1 {
     margin-bottom: 2rem;
 }
 #options {
+    border: 1px solid;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
-    width: 50vw;
+    width: 50%;
 }
 .option-button {
     display: flex;
@@ -104,6 +107,10 @@ html {
 /*******************************/
 #hero > h1 {
     border-bottom: 2px solid;
+    font-size: 10rem;
+}
+#hero > p {
+    font-size: 2rem;
 }
 .option-button {
     transition: 0.2s color;

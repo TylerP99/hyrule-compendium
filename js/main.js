@@ -470,6 +470,7 @@ class Glyph_Border {
     constructor() {
         this.make_border();
         this.animationInterval = setInterval(this.animate_border.bind(this), this.animationTimer);
+        this.dynamicHeightAdjustment = dynamic_height_adjustment();
     }
 
     /************Member Variables************/
