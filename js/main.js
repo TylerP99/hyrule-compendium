@@ -467,45 +467,89 @@ class Glyph_Border {
     /* up to maxGlyphs defined below.            */
     /*===========================================*/
 
-    constructor() {
-        this.make_border();
-        this.animationInterval = setInterval(this.animate_border.bind(this), this.animationTimer);
-        this.dynamicHeightAdjustment = dynamic_height_adjustment();
-    }
-
     /************Member Variables************/
 
     borderContainer = document.createElement("ul"); 
-    animationTimer = 5; //In ms
+    animationTimer = 50; //In ms
     lastPageHeight = 0
     minGlyphs = 0;
     maxGlyphs = 9;
 
     /************Member Methods************/
 
+    // Enables border: builds border based on page height, turn on animation, turn on dynamic height adjustment
+    init() {
+        //Build up border
+        //Animate border
+        this.enable_animation();
+
+        //Enable height adjuster
+    }
+
     //Returns current height of the currently rendered border ul
     get_height() {
         return Math.max( this.borderContainer.scrollHeight, this.borderContainer.offsetHeight, this.borderContainer.clientHeight)
     }
 
-    //Creates border based on page size
+    /*========== Construction Methods ==========*/
+    /* Builds border structure */
 
+    //Creates border based on page size
     //Naive implementation, need live testing
     make_border() {
         let pageHeight = get_page_height();
         this.lastPageHeight = pageHeight;
         const glyphHeight = 20;
 
+        delete_children(this.borderContainer);
+
         for(let i = 0; i < pageHeight/glyphHeight; ++i) {
-            this.make_random_glyph_ul();
+            this.add_glyph_row();
         }
+        this.lastPageHeight = get_page_height();
     }
 
-    enable() {
+    // Dynamically adjusts height of border depending on height changes. Need to minimize impact of checking as much as possible or API call is super slowww...
+    height_manager() {
+
+    }
+
+    // Creates a row of random glyphs and appends it to the glyphContainer ul
+    // No parameters or returns
+    add_glyph_row() {
+        const glyphUl = document.createElement("ul"); // Create the containing ul
+
+        const lowerLimit = this.minGlyphs; //Minimum number of glyphs allowed in the ul
+
+        const upperLimit = this.maxGlyphs + 1; //Maximum number of glyphs allowed in the ul, non inclusive
+
+        const numberOfGlyphs = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit; //Get a random number for the amount of glyphs to generate for the ul. lowerLimit is the minimum amount of glyphs required
+
+        for(let i = 0; i < numberOfGlyphs; ++i) //Runs numberOgGlyphs times to populate the ul with that many glyphs
+        {
+            const glyphLi = document.createElement("li"); //Create the li to contain the svg glyph
+            glyphLi.classList.add("glyph"); //Add the class for styles
+
+            const randomGlyph = this.get_random_glyph(); //Generate a random glyph to use
+
+            glyphLi.appendChild(randomGlyph.glyph); //Append the glyph to the li
+            glyphUl.appendChild(glyphLi); //Append the li to the ul
+        }
+        this.borderContainer.appendChild(glyphUl); //Append the ul to the borderContainer ul
+    }
+
+    remove_last_row() {
+        this.borderContainer.removeChild(this.borderContainer.lastChild);
+    }
+
+
+    /*========== Animation Methods ==========*/
+
+    enable_animation() {
         this.animationInterval = setInterval(this.animate_border.bind(this), this.animationTimer);
     }
 
-    disable() {
+    disable_animation() {
         clearInterval(this.animationInterval);
     }
 
@@ -515,7 +559,6 @@ class Glyph_Border {
     //
     // Returns: Nothing, but modifies a random glyph and glyphlist within the 
     // border in some way (Possible ways described by individual animation functions)
-
     animate_border() {
         //Goal: Randomly toggle fade on glyphs
         //Get list of uls of lis of glyphs
@@ -550,9 +593,6 @@ class Glyph_Border {
         }
         return;
     }
-
-
-    /************** Animation Methods **************/
 
     //Deletes a random glyph from a glyph list, does nothing if the list is empty
     // Parameters:
@@ -633,6 +673,8 @@ class Glyph_Border {
         }
     }
 
+    /*========== Utility Functions ==========*/
+
     //Given a list of glpyhs, returns a reference to a random one, or null if the list is empty
     //
     // Parameters:
@@ -644,30 +686,6 @@ class Glyph_Border {
         if(glyphNodeList.length == 0) { return null; } //IF the list is empty, return null for the caller to handle
         const randomIndex = Math.floor(Math.random() * glyphNodeList.length); //Gets a random index based on the length of the nodelist
         return glyphNodeList[randomIndex]; //Return random glyph
-    }
-
-    // Creates a row of random glyphs and appends it to the glyphContainer ul
-    // No parameters or returns
-    make_random_glyph_ul() {
-        const glyphUl = document.createElement("ul"); // Create the containing ul
-
-        const lowerLimit = this.minGlyphs; //Minimum number of glyphs allowed in the ul
-
-        const upperLimit = this.maxGlyphs + 1; //Maximum number of glyphs allowed in the ul, non inclusive
-
-        const numberOfGlyphs = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit; //Get a random number for the amount of glyphs to generate for the ul. lowerLimit is the minimum amount of glyphs required
-
-        for(let i = 0; i < numberOfGlyphs; ++i) //Runs numberOgGlyphs times to populate the ul with that many glyphs
-        {
-            const glyphLi = document.createElement("li"); //Create the li to contain the svg glyph
-            glyphLi.classList.add("glyph"); //Add the class for styles
-
-            const randomGlyph = this.get_random_glyph(); //Generate a random glyph to use
-
-            glyphLi.appendChild(randomGlyph.glyph); //Append the glyph to the li
-            glyphUl.appendChild(glyphLi); //Append the li to the ul
-        }
-        this.borderContainer.appendChild(glyphUl); //Append the ul to the borderContainer ul
     }
 
     //Generates a random glyph

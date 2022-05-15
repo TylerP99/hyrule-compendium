@@ -2,38 +2,13 @@
 
 ToDo:
 
-NEXT GOAL: 
+ - View All category jump buttons
 
- - Figure out mobile glyph borders, maybe low resource version?
+ - Dynamic adjustment for borders
 
- - Jump to buttons for all-entries page (last of the js for now)
+ - Mobile borders
 
- - Fix mobile, it's not looking amazing
-
- - Fix SVG Sheikah logo (its rough, maybe look into inkscape idk)
-
-  - Explore different body fonts?
-
-  - Font Glow
-
-Landing Page:
-
- - Opening Sheikah logo animation
-
- - Responsive Website & Tablet Layout
-
- - Mobile Layout
-
-Search:
- 
- - Layouts and styles for now
-
- - Better search (multiple results, search by term insead of just name)
-
-All Entries:
-
- - Minimal mode, just display name and picture, clicking pulls up full card
-
+ - Finalization through small layout and color adjustments 
 
  #Credits:
 
