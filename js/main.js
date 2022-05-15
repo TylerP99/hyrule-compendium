@@ -76,6 +76,8 @@ class Site_Driver {
     init_borders() {
         this.leftBorderContainer.appendChild(this.leftBorder.borderContainer);
         this.rightBorderContainer.appendChild(this.rightBorder.borderContainer);
+        this.leftBorder.init();
+        this.rightBorder.init();
     }
 };
 
@@ -474,16 +476,22 @@ class Glyph_Border {
     lastPageHeight = 0
     minGlyphs = 0;
     maxGlyphs = 9;
+    heightRefreshTime = 100; //In ms
+    heightManager;
+    glyphHeight = 20;
 
     /************Member Methods************/
 
     // Enables border: builds border based on page height, turn on animation, turn on dynamic height adjustment
     init() {
         //Build up border
+        this.make_border();
+
         //Animate border
         this.enable_animation();
 
         //Enable height adjuster
+        this.init_height_manager();
     }
 
     //Returns current height of the currently rendered border ul
@@ -509,9 +517,42 @@ class Glyph_Border {
         this.lastPageHeight = get_page_height();
     }
 
+    init_height_manager() {
+        this.heightManager = setInterval(this.height_manager.bind(this), this.heightRefreshTime);
+    }
+
     // Dynamically adjusts height of border depending on height changes. Need to minimize impact of checking as much as possible or API call is super slowww...
     height_manager() {
+        //Check page height
+        const currentPageHeight = get_page_height();
+        const heightDifference = Math.abs(currentPageHeight - this.lastPageHeight);
+        console.log(`Heightdiff: ${heightDifference}`)
+        const rowsNeeded = Math.ceil(heightDifference/this.glyphHeight)
+        console.log(this.glyphHeight)
+        console.log(`rows needed: ${rowsNeeded}`)
 
+        //If page height has changed, adjust border
+        //If it decreased, delete rows until border height is just below page height, then add a row
+        if(currentPageHeight < this.lastPageHeight)
+        {
+            for(let i = 0; i < rowsNeeded; ++i)
+            {
+                this.remove_last_row();
+            }
+        }
+        //If it increased, add rows until border heigh exceeds page height
+        else if(currentPageHeight > this.lastPageHeight)
+        {
+            for(let i = 0; i < rowsNeeded; ++i)
+            {
+                this.add_glyph_row();
+            }
+        }
+        else
+        {
+        }
+        //Update height
+        this.lastPageHeight = get_page_height();
     }
 
     // Creates a row of random glyphs and appends it to the glyphContainer ul
