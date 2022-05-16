@@ -18,7 +18,7 @@
 
 html {
     font-size: 62.5%;
-    text-shadow: 0 0 10px #00e1ff, 0 0 20px #00e1ff
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
 }
 
 /*===========================*/
@@ -168,6 +168,14 @@ html {
 }
 #search-input {
     align-self: center;
+
+    border: 3px solid #ea920b;
+    color: #00e1ff;
+    background: black;
+    text-emphasis: bold;
+}
+#search-input:focus {
+    outline: solid #00e1ff;
 }
 .search-result {
     display: flex;
@@ -175,6 +183,9 @@ html {
     align-items: center;
 
     width: 33%;
+}
+.search-result .card {
+    width: 100%;
 }
 
 /* STYLES */
@@ -219,7 +230,10 @@ html {
     width: 20%;
 }
 #sort-list li {
-    width: 50%;
+    font-size: 2rem;
+    border: 3px solid;
+    text-align: center;
+    width: 49%;
 }
 
 .card-container {
@@ -253,6 +267,9 @@ html {
     align-items: center;
     flex-wrap: wrap;
 }
+.cards .card {
+    width: 30%;
+}
 
 #all-body .card {
     margin-bottom: 3rem;
@@ -284,7 +301,6 @@ html {
     align-items: center;
 
     padding: 1rem;
-    width: 30vw;
 }
 .upper-info, .lower-info {
     display: flex;
