@@ -2,13 +2,13 @@
 
 ToDo:
 
- - View All category jump buttons
-
- - Dynamic adjustment for borders
+ - Try new border implementation: position absolute them... no need for dynamic creation if they follow and all entries wouldnt look so slow
 
  - Mobile borders
 
  - Finalization through small layout and color adjustments 
+
+ -Style the search bar
 
  #Credits:
 

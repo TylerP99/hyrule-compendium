@@ -18,6 +18,7 @@
 
 html {
     font-size: 62.5%;
+    text-shadow: 0 0 10px #00e1ff, 0 0 20px #00e1ff
 }
 
 /*===========================*/
@@ -39,21 +40,20 @@ html {
     height: 100vh;
 }
 .index-container {
-    border: 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
     width: 80%;
+    margin-bottom: 10rem;
 }
 .index-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 #hero {
-    border: 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -61,18 +61,17 @@ html {
 
     margin-bottom: 2rem;
 
-    width: 50%;
+    width: 40%;
 }
 #hero > h1 {
     margin-bottom: 2rem;
 }
 #options {
-    border: 1px solid;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
-    width: 50%;
+    width: 30%;
 }
 .option-button {
     display: flex;
@@ -154,6 +153,9 @@ html {
 
     height: 90vh;
     width: 90%;
+}
+.search-content  p {
+    margin-bottom: 2rem;
 }
 .search-form {
     display: flex;
@@ -346,11 +348,7 @@ html {
 /*===========================*/
 
 /*Border styles*/
-.glyph-border-right {
-    width: 10%;
-}
-
-.glyph-border-left {
+.glyph-border-right, .glyph-border-left {
     width: 10%;
 }
 
@@ -359,12 +357,18 @@ html {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+
+    top: 0;
+    position: sticky;
 }
 .glyph-border-right > ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
+
+    top: 0;
+    position: sticky;
 }
 
 .glyph-border-left > ul > ul, .glyph-border-right > ul > ul {
@@ -473,7 +477,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     border-bottom: 2px solid;
-    font-size: 5rem;
+    font-size: 7rem;
 }
 
 h2 {
@@ -493,7 +497,7 @@ h5, h6 {
 }
 
 p, span{
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 

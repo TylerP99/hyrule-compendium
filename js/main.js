@@ -472,7 +472,7 @@ class Glyph_Border {
     /************Member Variables************/
 
     borderContainer = document.createElement("ul"); 
-    animationTimer = 50; //In ms
+    animationTimer = 4; //In ms
     lastPageHeight = 0
     minGlyphs = 0;
     maxGlyphs = 9;
@@ -491,7 +491,7 @@ class Glyph_Border {
         this.enable_animation();
 
         //Enable height adjuster
-        this.init_height_manager();
+        //this.init_height_manager();
     }
 
     //Returns current height of the currently rendered border ul
