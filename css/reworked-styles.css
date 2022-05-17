@@ -198,6 +198,8 @@ html {
 
 #all-body{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .all-e-container {
@@ -482,8 +484,8 @@ body {
     color: #ea920b;
 }
 
-.hidden {
-    display: none;
+.hidden { /* Important so it always overrides like it should */
+    display: none !important;
 }
 
 /* General Header Rule */
@@ -522,68 +524,161 @@ p, span{
 /*   Mobile/Tablet Styles    */
 /*===========================*/
 
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 1600px){
+    /*===========================*/
+    /*       Index Changes       */
+    /*===========================*/
+    #index-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .index-container {
+        border: 1px solid;
+        width: 100%;
+    }
+    .index-container, .index-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #hero {
+        width: 90%;
+    }
+    #hero h1 {
+        font-size: 7rem;
+    }
+    #options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+    }
+    
+    /*===========================*/
+    /*       Search Changes      */
+    /*===========================*/
 
-    .index-content {
+    #s-body {
+        display: flex;
+        justify-content: center;
+        align-items: unset;
+    }
+    .search-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .search-content {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
 
-        width: 100%;
-    }
-    .index-content #hero, .index-content #options {
+        height: auto;
         width: 95%;
     }
-    #hero {
-        margin-top: -10rem;
-        margin-bottom: 10rem;
-    }
-
-    .search-content {
+    .search-form {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
+
+        margin-bottom: 2rem;
+
+        width: 100%;
     }
-    .search-content > * {
+    .search-content h1, .search-content p {
+        width: 100%;
+    }
+    .search-result {
+        width: 100%;
+    }
+    .search-result .card {
         width: 100%;
     }
 
-    #sort-list {
-        flex-direction: column;
-    }
 
-    .card {
-        width: 90vw;
-    }
-    html {
-        font-size: 62.5%;
-    }
 
-    .back-button, .option-button {
-        transition: none;
-    }
+    /*===========================*/
+    /*    All Entries Changes    */
+    /*===========================*/
 
-    #index-body, #s-body, #all-body {
+    .all-e-container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+
+        width: 100%;
+    }
+    .back-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        width: 100%;
+    }
+    .back-button{
+        align-self: flex-start;
+    }
+    .all-e-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .all-e-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 95%;
+    }
+    .all-e-info h1{
+        font-size: 5rem;
+        width: 50%;
+    }
+    #sort-list{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 50%;
+    }
+    #sort-list li {
+        width: 75%;
+    }
+    
+    .cards .card {
+        width: 100%;
     }
 
-    .glyph-border {
-        letter-spacing: 1rem;
-        writing-mode: inherit;
+    /*===========================*/
+    /*      Border Changes       */
+    /*===========================*/
+    .glyph-border-left, .glyph-border-right {
+        opacity: 0.3;
+        z-index: -1;
+        display: fixed;
+        width: 1%;
+        align-self: unset;
+
     }
 
-    .loading-icon > img{
-        max-width: 70%;
-    }
+    /*===========================*/
+    /*        Card Changes       */
+    /*===========================*/
+
+    /*===========================*/
+    /*      General Changes      */
+    /*===========================*/
+
 }
 
-@media (min-width: 600px) and (max-width: 1200px) {
-    .card {
-        width: 45vw;
+@media (min-width: 700px) and (max-width: 1600px){
+    .cards .card {
+        width: 48%;
     }
 }
