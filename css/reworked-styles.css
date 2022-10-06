@@ -424,9 +424,9 @@ body {
 
 /* Might move to all entries section if it isnt used in search*/
 .loading-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
 }
 /* Loading Icon Animation */
 .loading-icon {
